@@ -1,0 +1,321 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AFF7339D-CC26-4D1E-B762-5B132EC479C7}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApplication</RootNamespace>
+    <AssemblyName>WebApplication</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44315</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="admin\dashboard.aspx" />
+    <Content Include="admin\manage-materials.aspx" />
+    <Content Include="admin\manage-users.aspx" />
+    <Content Include="App_Data\Database1.mdf" />
+    <Content Include="App_Data\Database1_log.ldf">
+      <DependentUpon>Database1.mdf</DependentUpon>
+    </Content>
+    <Content Include="assets\css\admin-dashboard.css" />
+    <Content Include="assets\css\admin-manage-materials.css" />
+    <Content Include="assets\css\admin-manage-users.css" />
+    <Content Include="assets\css\anatomy.css" />
+    <Content Include="assets\css\create-quiz.css" />
+    <Content Include="assets\css\dashboard.css" />
+    <Content Include="assets\css\explore-3d.css" />
+    <Content Include="assets\css\guest-quiz.css" />
+    <Content Include="assets\css\guest-resources.css" />
+    <Content Include="assets\css\guest-search.css" />
+    <Content Include="assets\css\lecturer-profile.css" />
+    <Content Include="assets\css\lecturer.css" />
+    <Content Include="assets\css\materials.css" />
+    <Content Include="assets\css\notes.css" />
+    <Content Include="assets\css\profile.css" />
+    <Content Include="assets\css\quiz.css" />
+    <Content Include="assets\css\search-resources.css" />
+    <Content Include="assets\css\style.css" />
+    <Content Include="assets\css\search-latest-index.css" />
+    <Content Include="assets\css\upload-materials.css" />
+    <Content Include="assets\images\3d-banner.png" />
+    <Content Include="assets\images\admin-card.png" />
+    <Content Include="assets\images\anatomy.png" />
+    <Content Include="assets\images\brain.png" />
+    <Content Include="assets\images\cardio.png" />
+    <Content Include="assets\images\guest-card.png" />
+    <Content Include="assets\images\hero-anatomy.png" />
+    <Content Include="assets\images\lecturer-card.png" />
+    <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\neuro.png" />
+    <Content Include="assets\images\pharma.png" />
+    <Content Include="assets\images\quiz-banner.png" />
+    <Content Include="assets\images\resources-banner.png" />
+    <Content Include="assets\images\student-card.png" />
+    <Content Include="assets\videos\body-3d.mp4" />
+    <Content Include="guest\explore-3d.aspx" />
+    <Content Include="guest\preview-quiz.aspx" />
+    <Content Include="guest\resources.aspx" />
+    <Content Include="index.aspx" />
+    <Content Include="lecturer\create-quiz.aspx" />
+    <Content Include="lecturer\profile.aspx" />
+    <Content Include="lecturer\search-resources.aspx" />
+    <Content Include="lecturer\upload-materials.aspx" />
+    <Content Include="lecturer\view-quiz.aspx" />
+    <Content Include="login.aspx" />
+    <Content Include="admin\register.aspx" />
+    <Content Include="student\anatomy.aspx" />
+    <Content Include="student\materials.aspx" />
+    <Content Include="student\notes.aspx" />
+    <Content Include="student\profile.aspx" />
+    <Content Include="student\quiz-summary.aspx" />
+    <Content Include="student\quiz.aspx" />
+    <Content Include="student\QuizResults.aspx" />
+    <Content Include="student\student-dashboard.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="admin\dashboard.aspx.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\dashboard.aspx.designer.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\manage-materials.aspx.cs">
+      <DependentUpon>manage-materials.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\manage-materials.aspx.designer.cs">
+      <DependentUpon>manage-materials.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\manage-users.aspx.cs">
+      <DependentUpon>manage-users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\manage-users.aspx.designer.cs">
+      <DependentUpon>manage-users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="guest\explore-3d.aspx.cs">
+      <DependentUpon>explore-3d.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="guest\explore-3d.aspx.designer.cs">
+      <DependentUpon>explore-3d.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="guest\preview-quiz.aspx.cs">
+      <DependentUpon>preview-quiz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="guest\preview-quiz.aspx.designer.cs">
+      <DependentUpon>preview-quiz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="guest\resources.aspx.cs">
+      <DependentUpon>resources.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="guest\resources.aspx.designer.cs">
+      <DependentUpon>resources.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="lecturer\create-quiz.aspx.cs">
+      <DependentUpon>create-quiz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="lecturer\create-quiz.aspx.designer.cs">
+      <DependentUpon>create-quiz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="lecturer\profile.aspx.cs">
+      <DependentUpon>profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="lecturer\profile.aspx.designer.cs">
+      <DependentUpon>profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="lecturer\search-resources.aspx.cs">
+      <DependentUpon>search-resources.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="lecturer\search-resources.aspx.designer.cs">
+      <DependentUpon>search-resources.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="lecturer\upload-materials.aspx.cs">
+      <DependentUpon>upload-materials.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="lecturer\upload-materials.aspx.designer.cs">
+      <DependentUpon>upload-materials.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="lecturer\view-quiz.aspx.cs">
+      <DependentUpon>view-quiz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="lecturer\view-quiz.aspx.designer.cs">
+      <DependentUpon>view-quiz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="admin\register.aspx.cs">
+      <DependentUpon>register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\register.aspx.designer.cs">
+      <DependentUpon>register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="student\anatomy.aspx.cs">
+      <DependentUpon>anatomy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student\anatomy.aspx.designer.cs">
+      <DependentUpon>anatomy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="student\materials.aspx.cs">
+      <DependentUpon>materials.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student\materials.aspx.designer.cs">
+      <DependentUpon>materials.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="student\notes.aspx.cs">
+      <DependentUpon>notes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student\notes.aspx.designer.cs">
+      <DependentUpon>notes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="student\profile.aspx.cs">
+      <DependentUpon>profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student\profile.aspx.designer.cs">
+      <DependentUpon>profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="student\quiz-summary.aspx.cs">
+      <DependentUpon>quiz-summary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student\quiz-summary.aspx.designer.cs">
+      <DependentUpon>quiz-summary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="student\quiz.aspx.cs">
+      <DependentUpon>quiz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student\quiz.aspx.designer.cs">
+      <DependentUpon>quiz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="student\QuizResults.aspx.cs">
+      <DependentUpon>QuizResults.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student\QuizResults.aspx.designer.cs">
+      <DependentUpon>QuizResults.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="student\student-dashboard.aspx.cs">
+      <DependentUpon>student-dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student\student-dashboard.aspx.designer.cs">
+      <DependentUpon>student-dashboard.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\materials\" />
+    <Folder Include="App_Data\ProfilesPhotos\" />
+    <Folder Include="assets\js\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>16163</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44315/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

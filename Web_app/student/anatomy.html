@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Anatomy | MediLearn Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/dashboard.css" />
+  <link rel="stylesheet" href="../assets/css/anatomy.css" />
+</head>
+<body class="dashboard-body">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="../assets/images/logo.png" alt="MediLearn Hub" class="sidebar-logo" />
+      <h2>MediLearn Hub</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="student-dashboard.html">🏠 Dashboard</a>
+      <a href="profile.html">👤 Profile</a>
+      <a href="materials.html">📚 Learning Materials</a>
+      <a href="quiz.html">🧠 Quizzes</a>
+      <a href="anatomy.html" class="active">👨🏽‍🔬 3D Anatomy</a>
+      <a href="notes.html">📝 My Notes</a>
+      <a href="../index.html" class="logout">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <h1>👨🏽‍🔬 3D Anatomy Viewer</h1>
+      <p>Explore the human body in an interactive 3D environment.</p>
+    </header>
+
+    <section class="anatomy-section">
+      <div class="anatomy-viewer">
+        <!-- Placeholder for 3D model -->
+        <iframe
+          src="https://sketchfab.com/models/7w7pAfr8B3N6KmtTHTmSrP9u7bBy/embed"
+          frameborder="0"
+          allowfullscreen
+          class="model-frame">
+        </iframe>
+      </div>
+
+      <div class="anatomy-info">
+        <h2>Human Heart Anatomy</h2>
+        <p>
+          The human heart is a muscular organ responsible for pumping blood through
+          the circulatory system. This 3D visualization allows students to examine
+          the structure, including the ventricles, atria, and major vessels, from
+          multiple perspectives.
+        </p>
+
+        <ul class="anatomy-details">
+          <li>💓 Four chambers: Left/Right Atria & Ventricles</li>
+          <li>🩸 Circulates oxygenated and deoxygenated blood</li>
+          <li>🔍 Zoom and rotate for interactive exploration</li>
+        </ul>
+
+        <div class="anatomy-actions">
+          <button class="btn btn-primary">Next Model</button>
+          <button class="btn btn-ghost">Download Notes</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

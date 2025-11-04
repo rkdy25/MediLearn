@@ -1,0 +1,130 @@
+/* ================================
+   Quiz Page Styles — Perfect Alignment
+================================ */
+
+/* Ensure side-by-side layout */
+.dashboard-body {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f8fb;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 40px;
+  background: #f9fbfd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Quiz Section */
+.quiz-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.quiz-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  padding: 35px 40px;
+  width: 100%;
+  max-width: 800px;
+}
+
+/* Header inside quiz */
+.quiz-top {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.question-count {
+  color: #00325f;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* Progress bar */
+.quiz-progress {
+  width: 100%;
+  height: 8px;
+  background: #d9ecff;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #0078d4, #00c6ff);
+  transition: width 0.4s ease;
+}
+
+/* Question block */
+.quiz-question h3 {
+  color: #00457c;
+  margin-bottom: 15px;
+}
+
+.quiz-options {
+  list-style: none;
+}
+
+.quiz-options li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f6f9fc;
+  border: 1.5px solid #d0e6ff;
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.quiz-options li:hover {
+  background: #e6f3ff;
+  border-color: #0078d4;
+}
+
+.quiz-options input {
+  accent-color: #0078d4;
+}
+
+/* Buttons */
+.quiz-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.quiz-submit {
+  text-align: center;
+  margin-top: 25px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .dashboard-body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .dashboard-main {
+    padding: 25px;
+  }
+
+  .quiz-card {
+    padding: 25px;
+  }
+}

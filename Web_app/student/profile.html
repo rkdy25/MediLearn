@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile | MediLearn Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/profile.css">
+</head>
+<body class="dashboard-body">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="../assets/images/logo.png" alt="MediLearn Hub" class="sidebar-logo">
+      <h2>MediLearn Hub</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="student-dashboard.html">🏠 Dashboard</a>
+      <a href="profile.html" class="active">👤 Profile</a>
+      <a href="materials.html">📚 Learning Materials</a>
+      <a href="quiz.html">🧠 Quizzes</a>
+      <a href="anatomy.html">👨🏽‍🔬 3D Anatomy</a>
+      <a href="notes.html">📝 My Notes</a>
+      <a href="../index.html" class="logout">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <h1>👤 My Profile</h1>
+      <p>View and update your personal information below.</p>
+    </header>
+
+    <!-- Profile Container -->
+    <section class="profile-section">
+      <div class="profile-card">
+        <div class="profile-left">
+          <img src="../assets/images/avatar-student.png" alt="Student Avatar" class="profile-pic">
+          <button class="btn-change">Change Photo</button>
+        </div>
+
+        <div class="profile-right">
+          <form action="#" method="post" class="profile-form">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" value="Eddy" required>
+
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" value="Rakotobe" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" value="eddy@student.medilearn.edu" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" value="********" required>
+
+            <div class="profile-actions">
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+              <button type="reset" class="btn btn-ghost">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

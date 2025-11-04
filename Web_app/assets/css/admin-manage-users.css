@@ -1,0 +1,223 @@
+/* ================================
+   MediLearn Hub – Manage Users Page
+================================ */
+
+.dashboard-body {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f8fb;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 40px;
+  background: #f9fbfd;
+}
+
+/* Section Layout */
+.admin-section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 25px;
+}
+
+/* Admin Cards */
+.admin-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px 35px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-3px);
+}
+
+.admin-card h2 {
+  color: #00325f;
+  margin-bottom: 15px;
+}
+
+/* Add User Form */
+.user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-form label {
+  font-weight: 600;
+  color: #00457c;
+  margin-bottom: 5px;
+}
+
+.user-form input,
+.user-form select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #cfe4f6;
+  font-size: 0.95rem;
+  transition: 0.3s ease;
+  background: #fafcff;
+}
+
+.user-form input:focus,
+.user-form select:focus {
+  border-color: #0078d4;
+  outline: none;
+  box-shadow: 0 0 6px rgba(0,120,212,0.3);
+}
+
+.user-form button {
+  width: 200px;
+  margin-top: 10px;
+  align-self: flex-start;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+thead {
+  background: #e8f2ff;
+  color: #00325f;
+}
+
+th, td {
+  text-align: left;
+  padding: 14px 12px;
+  border-bottom: 1px solid #dce7f5;
+}
+
+tbody tr:hover {
+  background: #f4faff;
+  transition: 0.3s ease;
+}
+
+th {
+  font-weight: 700;
+}
+
+/* Role + Status Styles */
+.role {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.role.student {
+  background: #e4f3ff;
+  color: #0062a3;
+}
+
+.role.lecturer {
+  background: #fef3d4;
+  color: #b36a00;
+}
+
+.role.admin {
+  background: #e8d9ff;
+  color: #6a00b3;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.status.active {
+  background: #d4f6df;
+  color: #1a7d3a;
+}
+
+.status.inactive {
+  background: #fde6e6;
+  color: #c23c3c;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.btn-ghost {
+  background: #eef6ff;
+  color: #0056a3;
+  border: 1px solid #c6e2ff;
+}
+
+.btn-ghost:hover {
+  background: #d9edff;
+  border-color: #0078d4;
+}
+
+.btn-danger {
+  background: #d9534f;
+  color: #fff;
+  border: none;
+}
+
+.btn-danger:hover {
+  background: #c9302c;
+}
+
+.btn-primary {
+  background: #0078d4;
+  color: #fff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #005fa3;
+}
+
+/* Buttons Layout */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  .action-buttons {
+    flex-wrap: wrap;
+  }
+}

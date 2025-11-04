@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search — MediLearn Hub</title>
+  <link rel="stylesheet" href="../assets/css/guest-search.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <img src="../assets/images/logo.png" alt="MediLearn Hub logo" class="logo">
+        <span class="brand-name">MediLearn Hub</span>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../login.html">Login / Register</a></li>
+          <li><a href="search.html" class="active">Search</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero / Search Intro -->
+  <section class="search-hero">
+    <div class="container hero-inner">
+      <h1>Discover Learning Resources</h1>
+      <p>Search lecture notes, quizzes, and interactive 3D models available for guests.</p>
+      <form action="#" class="search-form">
+        <input type="text" placeholder="Type keyword or course name...">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Example Results -->
+  <section class="search-results">
+    <div class="container results-grid">
+      <div class="result-card">
+        <img src="../assets/images/cardio.png" alt="Resource" class="card-img">
+        <h3>Cardiology Case Study</h3>
+        <p>Analyze a patient case to understand myocardial infarction.</p>
+        <a href="#" class="card-link">View Resource →</a>
+      </div>
+      <div class="result-card">
+        <img src="../assets/images/anatomy.png" alt="Quiz" class="card-img">
+        <h3>Basic Anatomy Quiz</h3>
+        <p>Test your knowledge of human skeletal structure.</p>
+        <a href="#" class="card-link">Take Quiz →</a>
+      </div>
+      <div class="result-card">
+        <img src="../assets/images/brain.png" alt="3D Model" class="card-img">
+        <h3>3D Brain Model</h3>
+        <p>Explore a 3D interactive model of the human brain.</p>
+        <a href="#" class="card-link">Explore 3D →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> MediLearn Hub</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

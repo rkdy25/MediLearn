@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search Resources | MediLearn Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/dashboard.css" />
+  <link rel="stylesheet" href="../assets/css/search-resources.css" />
+</head>
+<body class="dashboard-body">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="../assets/images/logo.png" alt="MediLearn Hub" class="sidebar-logo" />
+      <h2>MediLearn Hub</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="lecturer-dashboard.html">🏠 Dashboard</a>
+      <a href="profile.html">👤 Profile</a>
+      <a href="upload-materials.html">📂 Upload Materials</a>
+      <a href="create-quiz.html">🧠 Create Quiz</a>
+      <a href="search-resources.html" class="active">🔍 Search Resources</a>
+      <a href="../index.html" class="logout">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <h1>🔍 Search Learning Resources</h1>
+      <p>Find materials by title, type, or description.</p>
+    </header>
+
+    <section class="search-section">
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search by title or keyword..." />
+        <select id="filter-type">
+          <option value="">All Types</option>
+          <option value="pdf">PDF</option>
+          <option value="video">Video</option>
+          <option value="pptx">Presentation</option>
+        </select>
+        <button class="btn btn-primary" id="search-btn">Search</button>
+      </div>
+
+      <!-- Search Results -->
+      <div class="results-grid" id="results">
+        <div class="resource-card">
+          <h3>Cardiology Lecture Notes</h3>
+          <p>PDF • Uploaded on 2025-10-12</p>
+          <p class="desc">Detailed explanation of ECG interpretation and cardiac anatomy.</p>
+          <div class="card-actions">
+            <button class="btn btn-ghost">View</button>
+            <button class="btn btn-primary">Download</button>
+          </div>
+        </div>
+
+        <div class="resource-card">
+          <h3>Human Anatomy Video</h3>
+          <p>MP4 • Uploaded on 2025-10-10</p>
+          <p class="desc">An overview of the muscular and skeletal systems with 3D visuals.</p>
+          <div class="card-actions">
+            <button class="btn btn-ghost">View</button>
+            <button class="btn btn-primary">Download</button>
+          </div>
+        </div>
+
+        <div class="resource-card">
+          <h3>Neuroscience Basics</h3>
+          <p>PPTX • Uploaded on 2025-10-05</p>
+          <p class="desc">Presentation covering the fundamentals of neural communication.</p>
+          <div class="card-actions">
+            <button class="btn btn-ghost">View</button>
+            <button class="btn btn-primary">Download</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("search-btn").addEventListener("click", () => {
+      const query = document.getElementById("search-input").value.trim();
+      const filter = document.getElementById("filter-type").value;
+      alert(`Searching for "${query}" (${filter || 'all types'})...`);
+    });
+  </script>
+</body>
+</html>

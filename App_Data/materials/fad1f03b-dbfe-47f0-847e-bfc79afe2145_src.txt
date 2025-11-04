@@ -1,0 +1,59 @@
+Install ubuntu and suricata :
+•	sudo apt update 
+sudo apt install –y suricata jq 
+•	Suricata -–build-info 
+
+
+Check ip address and network card 
+ip a
+
+Check config file
+sudo nano /etc/suricata/suricata.yaml 
+
+
+Create rule 
+•	Sudo mkdir –p /etc/suricata/rules 
+•	Sudo nano /etc/suricata/rules/local.rules 
+
+
+Explain the rule
+(added inside)
+
+
+Recheck nano file for the rule 
+sudo nano /etc/suricata/suricata.yaml 
+
+Load the rule
+sudo suricata –T –c /etc/suricata/suricata.yaml
+
+
+Testing
+sudo tail –F /var/log/suricata.eve.json | jq ‘select(.event_type== ‘alert’)’ 
+sudo tail –f /var/log/suricata/fast.log
+
+	a- HTTP 
+sudo mkdir –p /tmp/webroot
+echo ‘<?php echo “ok”; ?>’ | sudo tee /tmp/webroot/cmd.php > /dev/null 
+cd /tmp/webroot 
+sudo python3 –m http.server 80 –bind 192.168.56.101
+
+curl http://192.168.56.101/cmd.php
+
+
+	b SYN
+nmap –sS –sV –p- 192.168.56.101 –min-rate 1000 
+
+
+
+	c- ICMP
+ping –c 20 192.168.56.101 
+
+
+
+	d- SSH
+sudo apt install –y openssh-server 
+sudo systemctl enable ssh
+sudo systemctl start ssh 
+sudo systemctl status ssh 
+
+•	For I in {1..6}; do ssh –o ConnectTimeout=2 nonexistent@192.168.56.101 true; done:

@@ -1,0 +1,167 @@
+/* ================================
+   MediLearn Hub – Manage Materials
+================================ */
+
+.dashboard-body {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f8fb;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 40px;
+  background: #f9fbfd;
+}
+
+/* Search Bar */
+.search-bar {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  background: #fff;
+  padding: 20px 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+.search-bar input,
+.search-bar select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #cfe4f6;
+  font-size: 0.95rem;
+  flex: 1;
+  transition: 0.3s ease;
+}
+
+.search-bar input:focus,
+.search-bar select:focus {
+  border-color: #0078d4;
+  outline: none;
+  box-shadow: 0 0 6px rgba(0,120,212,0.3);
+}
+
+.search-bar button {
+  flex-shrink: 0;
+}
+
+/* Admin Card */
+.admin-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px 35px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-3px);
+}
+
+.admin-card h2 {
+  color: #00325f;
+  margin-bottom: 15px;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+thead {
+  background: #e8f2ff;
+  color: #00325f;
+}
+
+th, td {
+  text-align: left;
+  padding: 14px 12px;
+  border-bottom: 1px solid #dce7f5;
+}
+
+tbody tr:hover {
+  background: #f4faff;
+  transition: 0.3s ease;
+}
+
+th {
+  font-weight: 700;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.btn-ghost {
+  background: #eef6ff;
+  color: #0056a3;
+  border: 1px solid #c6e2ff;
+}
+
+.btn-ghost:hover {
+  background: #d9edff;
+  border-color: #0078d4;
+}
+
+.btn-danger {
+  background: #d9534f;
+  color: #fff;
+  border: none;
+}
+
+.btn-danger:hover {
+  background: #c9302c;
+}
+
+.btn-primary {
+  background: #0078d4;
+  color: #fff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #005fa3;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-bar input,
+  .search-bar select,
+  .search-bar button {
+    width: 100%;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  .action-buttons {
+    flex-wrap: wrap;
+  }
+}

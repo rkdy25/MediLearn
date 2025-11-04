@@ -1,0 +1,147 @@
+/* ================================
+   MediLearn Hub – Search Resources Page
+================================ */
+
+.dashboard-body {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f8fb;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 40px;
+  background: #f9fbfd;
+}
+
+/* Search Section */
+.search-section {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 25px;
+}
+
+/* Search Bar */
+.search-bar {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  background: #fff;
+  padding: 20px 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.search-bar input,
+.search-bar select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #cfe4f6;
+  font-size: 0.95rem;
+  flex: 1;
+  transition: 0.3s ease;
+}
+
+.search-bar input:focus,
+.search-bar select:focus {
+  border-color: #0078d4;
+  outline: none;
+  box-shadow: 0 0 6px rgba(0,120,212,0.3);
+}
+
+.search-bar button {
+  flex-shrink: 0;
+}
+
+/* Results Grid */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+/* Resource Cards */
+.resource-card {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  transition: 0.3s ease;
+}
+
+.resource-card:hover {
+  transform: translateY(-4px);
+}
+
+.resource-card h3 {
+  color: #00325f;
+  margin-bottom: 6px;
+  font-size: 1.1rem;
+}
+
+.resource-card p {
+  margin: 3px 0;
+  color: #546a7b;
+  font-size: 0.9rem;
+}
+
+.resource-card .desc {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #415768;
+}
+
+/* Card Actions */
+.card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.btn-ghost {
+  background: #eef6ff;
+  color: #0056a3;
+  border: 1px solid #c6e2ff;
+}
+
+.btn-ghost:hover {
+  background: #d9edff;
+  border-color: #0078d4;
+}
+
+.btn-primary {
+  background: #0078d4;
+  color: #fff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #005fa3;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-bar input,
+  .search-bar select,
+  .search-bar button {
+    width: 100%;
+  }
+}

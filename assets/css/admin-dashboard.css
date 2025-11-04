@@ -1,0 +1,175 @@
+/* ================================
+   MediLearn Hub – Admin Dashboard
+================================ */
+
+.dashboard-body {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f8fb;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 40px;
+  background: #f9fbfd;
+}
+
+/* Overview Cards */
+.overview-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.overview-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+  text-align: center;
+}
+
+.overview-card:hover {
+  transform: translateY(-3px);
+}
+
+.overview-card h3 {
+  color: #00457c;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.overview-card .value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0078d4;
+}
+
+/* Admin Section (Tables) */
+.admin-section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.admin-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px 35px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-3px);
+}
+
+.admin-card h2 {
+  color: #00325f;
+  margin-bottom: 15px;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+thead {
+  background: #e8f2ff;
+  color: #00325f;
+}
+
+th, td {
+  text-align: left;
+  padding: 14px 12px;
+  border-bottom: 1px solid #dce7f5;
+}
+
+tbody tr:hover {
+  background: #f4faff;
+  transition: 0.3s ease;
+}
+
+th {
+  font-weight: 700;
+}
+
+/* Status Labels */
+.status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.status.active {
+  background: #d4f6df;
+  color: #1a7d3a;
+}
+
+.status.inactive {
+  background: #fde6e6;
+  color: #c23c3c;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.btn-ghost {
+  background: #eef6ff;
+  color: #0056a3;
+  border: 1px solid #c6e2ff;
+}
+
+.btn-ghost:hover {
+  background: #d9edff;
+  border-color: #0078d4;
+}
+
+.btn-danger {
+  background: #d9534f;
+  color: #fff;
+  border: none;
+}
+
+.btn-danger:hover {
+  background: #c9302c;
+}
+
+/* Button layout */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .overview-cards {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  .action-buttons {
+    flex-wrap: wrap;
+  }
+}

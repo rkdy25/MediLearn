@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MediLearn Hub — Home</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Site header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/images/logo.png" alt="MediLearn Hub logo" class="logo">
+        <span class="brand-name">MediLearn Hub</span>
+      </a>
+
+      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mainNav">
+        ☰ <span class="sr-only">Toggle navigation</span>
+      </button>
+
+      <nav id="mainNav" class="main-nav" aria-label="Primary navigation">
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="login.html">Login / Register</a></li>
+          <li><a href="guest/resources.html">Resources</a></li>
+          <li><a href="guest/preview-quiz.html">Quizzes</a></li>
+          <li><a href="guest/explore-3d.html">Explore 3D</a></li>
+          <li><a href="guest/search.html">Search</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <h1>Learn medicine faster with interactive resources</h1>
+        <p>Access lecture notes, case studies, quizzes and 3D anatomy — all in one place for medical students.</p>
+        <div class="hero-actions">
+          <a href="login.html" class="btn btn-primary">Get Started</a>
+          <a href="guest/explore-3d.html" class="btn btn-ghost">Explore 3D Anatomy (Guest)</a>
+        </div>
+      </div>
+      <div class="hero-image" aria-hidden="true">
+        <img src="assets/images/hero-anatomy.png" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick search -->
+  <section class="search-strip">
+    <div class="container">
+      <form action="search.html" method="get" class="search-form" role="search">
+        <label for="q" class="sr-only">Search resources</label>
+        <input id="q" name="q" type="search" placeholder="Search lecture notes, case studies, quizzes…" />
+        <button type="submit" class="btn">Search</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Features / audience entry points -->
+  <section class="features">
+    <div class="container features-grid">
+      <article class="card">
+        <img src="assets/images/student-card.png" alt="Student" class="card-img">
+        <h3>Students</h3>
+        <p>Personal dashboard, progress tracking, quizzes, and discussion forums.</p>
+        <a class="card-link" href="student/student-dashboard.html">Open student dashboard →</a>
+      </article>
+
+      <article class="card">
+        <img src="assets/images/lecturer-card.png" alt="Lecturer" class="card-img">
+        <h3>Lecturers</h3>
+        <p>Upload materials, create assessments, and review student performance.</p>
+        <a class="card-link" href="lecturer/lecturer-dashboard.html">Open lecturer tools →</a>
+      </article>
+
+      <article class="card">
+        <img src="assets/images/guest-card.png" alt="Guest" class="card-img">
+        <h3>Guests</h3>
+        <p>Preview public resources and explore sample 3D anatomy models.</p>
+        <a class="card-link" href="guest/explore-3d.html">Explore 3D models →</a>
+      </article>
+  </section>
+
+  <!-- Latest resources preview -->
+  <section class="latest-resources">
+    <div class="container">
+      <h2>Latest Resources</h2>
+      <ul class="resource-list">
+        <li><a href="student/materials.html">Cardiology — Case Study: Myocardial Infarction</a></li>
+        <li><a href="student/materials.html">Anatomy — Interactive 3D Skull</a></li>
+        <li><a href="student/materials.html">Pharmacology — Quiz: Antihypertensive Drugs</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <p>© <span id="year"></span> MediLearn Hub</p>
+      </div>
+      <div class="footer-right">
+        <nav aria-label="Footer links">
+          <a href="about.html">About</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // small script for mobile nav toggle and footer year
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const nav = document.getElementById('mainNav');
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true' || false;
+        toggle.setAttribute('aria-expanded', !expanded);
+        nav.classList.toggle('open');
+      });
+
+      // footer year
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>

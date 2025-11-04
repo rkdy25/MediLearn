@@ -1,0 +1,200 @@
+/* ================================
+   MediLearn Hub – Create Quiz Page
+================================ */
+
+.dashboard-body {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f8fb;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 40px;
+  background: #f9fbfd;
+}
+
+/* Section Layout */
+.quiz-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+/* Left Card – Create Quiz */
+.quiz-card {
+  flex: 1 1 400px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 30px 35px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.quiz-card:hover {
+  transform: translateY(-3px);
+}
+
+.quiz-card h2 {
+  color: #00325f;
+  margin-bottom: 15px;
+}
+
+.quiz-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.quiz-form label {
+  font-weight: 600;
+  margin-top: 10px;
+  color: #00457c;
+}
+
+.quiz-form input,
+.quiz-form textarea,
+.quiz-form select {
+  padding: 10px 12px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1.5px solid #cfe4f6;
+  font-size: 0.95rem;
+  transition: 0.3s ease;
+  background: #fafcff;
+}
+
+.quiz-form input:focus,
+.quiz-form textarea:focus,
+.quiz-form select:focus {
+  border-color: #0078d4;
+  outline: none;
+  box-shadow: 0 0 6px rgba(0, 120, 212, 0.3);
+}
+
+.quiz-form button {
+  margin-top: 20px;
+}
+
+/* Right Card – Quiz List */
+.quiz-list {
+  flex: 1 1 550px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 30px 35px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.quiz-list:hover {
+  transform: translateY(-3px);
+}
+
+.quiz-list h2 {
+  color: #00325f;
+  margin-bottom: 15px;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+thead {
+  background: #e8f2ff;
+  color: #00325f;
+}
+
+th, td {
+  text-align: left;
+  padding: 14px 12px;
+  border-bottom: 1px solid #dce7f5;
+}
+
+th {
+  font-weight: 700;
+}
+
+tbody tr:hover {
+  background: #f4faff;
+  transition: 0.3s ease;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+/* Ghost button (View) */
+.btn-ghost {
+  background: #eef6ff;
+  color: #0056a3;
+  border: 1px solid #c6e2ff;
+}
+
+.btn-ghost:hover {
+  background: #d9edff;
+  border-color: #0078d4;
+}
+
+/* Delete button */
+.btn-danger {
+  background: #d9534f;
+  color: #fff;
+  border: none;
+}
+
+.btn-danger:hover {
+  background: #c9302c;
+}
+
+/* Primary Add button */
+.btn-primary {
+  background: #0078d4;
+  color: #fff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #005fa3;
+}
+
+/* Button Layout */
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .quiz-section {
+    flex-direction: column;
+  }
+
+  .quiz-card,
+  .quiz-list {
+    width: 100%;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  .action-buttons {
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,202 @@
+/* ================================
+   MediLearn Hub – Upload/Delete Materials Page
+================================ */
+
+/* Layout Base */
+.dashboard-body {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f8fb;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 40px;
+  background: #f9fbfd;
+}
+
+/* Section Layout */
+.materials-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+/* Upload Form Card */
+.upload-card {
+  flex: 1 1 350px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 30px 35px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.upload-card:hover {
+  transform: translateY(-3px);
+}
+
+.upload-card h2 {
+  color: #00325f;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-form label {
+  font-weight: 600;
+  margin-top: 10px;
+  color: #00457c;
+}
+
+.upload-form input,
+.upload-form textarea {
+  padding: 10px 12px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1.5px solid #cfe4f6;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  background: #fafcff;
+}
+
+.upload-form input:focus,
+.upload-form textarea:focus {
+  border-color: #0078d4;
+  outline: none;
+  box-shadow: 0 0 6px rgba(0, 120, 212, 0.3);
+}
+
+.upload-form button {
+  margin-top: 20px;
+}
+
+/* Uploaded Materials List */
+.materials-list {
+  flex: 1 1 550px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 30px 35px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.materials-list:hover {
+  transform: translateY(-3px);
+}
+
+.materials-list h2 {
+  color: #00325f;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+thead {
+  background: #e8f2ff;
+  color: #00325f;
+}
+
+th, td {
+  text-align: left;
+  padding: 14px 12px;
+  border-bottom: 1px solid #dce7f5;
+}
+
+th {
+  font-weight: 700;
+}
+
+tbody tr:hover {
+  background: #f4faff;
+  transition: 0.3s ease;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+/* Blue ghost button (Download) */
+.btn-ghost {
+  background: #eef6ff;
+  color: #0056a3;
+  border: 1px solid #c6e2ff;
+}
+
+.btn-ghost:hover {
+  background: #d9edff;
+  border-color: #0078d4;
+}
+
+/* Red delete button */
+.btn-danger {
+  background: #d9534f;
+  color: #fff;
+  border: none;
+}
+
+.btn-danger:hover {
+  background: #c9302c;
+}
+
+/* Primary upload button */
+.btn-primary {
+  background: #0078d4;
+  color: #fff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #005fa3;
+}
+
+/* Action buttons layout */
+.action-buttons {
+  display: flex;
+  gap: 12px; /* perfect spacing between buttons */
+  align-items: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1000px) {
+  .materials-section {
+    flex-direction: column;
+  }
+
+  .upload-card,
+  .materials-list {
+    width: 100%;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  .action-buttons {
+    flex-wrap: wrap;
+  }
+}
+s

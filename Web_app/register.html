@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Register | MediLearn Hub</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="assets/images/logo.png" alt="MediLearn Hub" class="logo">
+        <span class="brand-name">MediLearn Hub</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="auth-page">
+    <div class="container auth-container">
+      <div class="auth-card">
+        <h2>Create Your Account 🩺</h2>
+        <p class="auth-subtitle">Join MediLearn Hub and start your medical journey</p>
+
+        <form action="student/student-dashboard.html" method="post" class="auth-form">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" placeholder="Your first name" required>
+
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" placeholder="Your last name" required>
+
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Your email address" required>
+
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Create a password" required>
+
+          <label for="confirm">Confirm Password</label>
+          <input type="password" id="confirm" placeholder="Re-type your password" required>
+
+          <label for="role">Role</label>
+          <select id="role" required>
+            <option value="">Select your role</option>
+            <option value="student">Student</option>
+            <option value="lecturer">Lecturer</option>
+            <option value="admin">Admin</option>
+          </select>
+
+          <button type="submit" class="btn btn-primary">Register</button>
+
+          <p class="auth-switch">Already have an account?
+            <a href="login.html">Login here</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> MediLearn Hub</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

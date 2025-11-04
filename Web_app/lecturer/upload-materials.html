@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload Materials | MediLearn Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/dashboard.css" />
+  <link rel="stylesheet" href="../assets/css/upload-materials.css" />
+</head>
+<body class="dashboard-body">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="../assets/images/logo.png" alt="MediLearn Hub" class="sidebar-logo" />
+      <h2>MediLearn Hub</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="lecturer-dashboard.html">🏠 Dashboard</a>
+      <a href="profile.html">👤 Profile</a>
+      <a href="upload-materials.html" class="active">📂 Upload Materials</a>
+      <a href="create-quiz.html">🧠 Create Quiz</a>
+      <a href="search-resources.html" class="active">🔍 Search Resources</a>
+      <a href="../index.html" class="logout">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <h1>📂 Manage Learning Materials</h1>
+      <p>Upload, view, and delete course resources easily.</p>
+    </header>
+
+    <section class="materials-section">
+      <!-- Upload Form -->
+      <div class="upload-card">
+        <h2>Upload New Material</h2>
+        <form class="upload-form">
+          <label for="material-title">Title</label>
+          <input type="text" id="material-title" placeholder="Enter material title..." required />
+
+          <label for="material-desc">Description</label>
+          <textarea id="material-desc" placeholder="Short description..." rows="3"></textarea>
+
+          <label for="material-file">Choose File</label>
+          <input type="file" id="material-file" accept=".pdf,.pptx,.mp4,.docx" required />
+
+          <button type="submit" class="btn btn-primary">Upload Material</button>
+        </form>
+      </div>
+
+      <!-- Uploaded List -->
+      <div class="materials-list">
+        <h2>Uploaded Materials</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>File Type</th>
+              <th>Date Uploaded</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cardiology Basics</td>
+              <td>Introduction to ECG and heart structure</td>
+              <td>PDF</td>
+              <td>2025-10-22</td>
+              <td>
+                <button class="btn btn-ghost">Download</button>
+                <button class="btn btn-danger">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Human Anatomy Lecture 1</td>
+              <td>Video explanation of human organ systems</td>
+              <td>MP4</td>
+              <td>2025-10-15</td>
+<td>
+  <div class="action-buttons">
+    <button class="btn btn-ghost">Download</button>
+    <button class="btn btn-danger">Delete</button>
+  </div>
+</td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Example of alert for upload and delete actions
+    document.querySelector('.upload-form').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Material uploaded successfully!');
+    });
+
+    const deleteBtns = document.querySelectorAll('.btn-danger');
+    deleteBtns.forEach(btn => {
+      btn.addEventListener('click', () => alert('Material deleted successfully!'));
+    });
+  </script>
+</body>
+</html>

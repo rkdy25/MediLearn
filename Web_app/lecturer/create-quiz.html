@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Quiz | MediLearn Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/dashboard.css" />
+  <link rel="stylesheet" href="../assets/css/create-quiz.css" />
+</head>
+<body class="dashboard-body">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="../assets/images/logo.png" alt="MediLearn Hub" class="sidebar-logo" />
+      <h2>MediLearn Hub</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="lecturer-dashboard.html">🏠 Dashboard</a>
+      <a href="profile.html">👤 Profile</a>
+      <a href="upload-materials.html">📂 Upload Materials</a>
+      <a href="create-quiz.html" class="active">🧠 Create Quiz</a>
+      <a href="search-resources.html" class="active">🔍 Search Resources</a>
+      <a href="../index.html" class="logout">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <h1>🧠 Create and Manage Quizzes</h1>
+      <p>Design your assessments and manage existing quizzes easily.</p>
+    </header>
+
+    <section class="quiz-section">
+      <!-- Create Quiz Form -->
+      <div class="quiz-card">
+        <h2>Create a New Quiz</h2>
+        <form class="quiz-form">
+          <label for="quiz-title">Quiz Title</label>
+          <input type="text" id="quiz-title" placeholder="Enter quiz title..." required />
+
+          <label for="quiz-question">Question</label>
+          <textarea id="quiz-question" placeholder="Enter question..." rows="3" required></textarea>
+
+          <label>Options</label>
+          <input type="text" placeholder="Option A" required />
+          <input type="text" placeholder="Option B" required />
+          <input type="text" placeholder="Option C" required />
+          <input type="text" placeholder="Option D" required />
+
+          <label for="quiz-answer">Correct Answer</label>
+          <select id="quiz-answer" required>
+            <option value="">Select correct option...</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+            <option>D</option>
+          </select>
+
+          <button type="submit" class="btn btn-primary">Add Question</button>
+        </form>
+      </div>
+
+      <!-- Existing Quizzes -->
+      <div class="quiz-list">
+        <h2>Existing Quizzes</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Questions</th>
+              <th>Date Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Human Anatomy - Basics</td>
+              <td>10</td>
+              <td>2025-10-21</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-ghost">View</button>
+                  <button class="btn btn-danger">Delete</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Cardiology Fundamentals</td>
+              <td>8</td>
+              <td>2025-10-20</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-ghost">View</button>
+                  <button class="btn btn-danger">Delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Basic alert simulation
+    document.querySelector('.quiz-form').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Quiz question added successfully!');
+    });
+
+    const deleteBtns = document.querySelectorAll('.btn-danger');
+    deleteBtns.forEach(btn => {
+      btn.addEventListener('click', () => alert('Quiz deleted successfully!'));
+    });
+  </script>
+</body>
+</html>

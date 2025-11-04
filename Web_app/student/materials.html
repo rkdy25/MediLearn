@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Materials | MediLearn Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/materials.css">
+</head>
+<body class="dashboard-body">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="../assets/images/logo.png" alt="MediLearn Hub" class="sidebar-logo">
+      <h2>MediLearn Hub</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="student-dashboard.html">🏠 Dashboard</a>
+      <a href="profile.html">👤 Profile</a>
+      <a href="materials.html" class="active">📚 Learning Materials</a>
+      <a href="quiz.html">🧠 Quizzes</a>
+      <a href="anatomy.html">👨🏽‍🔬 3D Anatomy</a>
+      <a href="notes.html">📝 My Notes</a>
+      <a href="../index.html" class="logout">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <h1>📚 Learning Materials</h1>
+      <p>Access your uploaded study resources here.</p>
+    </header>
+
+    <div class="materials-top-bar">
+      <input type="text" class="search-box" placeholder="🔍 Search materials...">
+      <button class="btn btn-primary">Search</button>
+    </div>
+
+    <section class="materials-section">
+      <table class="materials-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Subject</th>
+            <th>Type</th>
+            <th>Uploaded by</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cardiology — ECG Interpretation</td>
+            <td>Cardiology</td>
+            <td>PDF</td>
+            <td>Dr. Smith</td>
+            <td><a href="#" class="btn btn-ghost">Download</a></td>
+          </tr>
+          <tr>
+            <td>Human Brain Anatomy</td>
+            <td>Neuroscience</td>
+            <td>Video</td>
+            <td>Dr. Tan</td>
+            <td><a href="#" class="btn btn-ghost">Watch</a></td>
+          </tr>
+          <tr>
+            <td>DNA Replication & Genetics</td>
+            <td>Genetics</td>
+            <td>PDF</td>
+            <td>Prof. Lee</td>
+            <td><a href="#" class="btn btn-ghost">Download</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+</body>
+</html>

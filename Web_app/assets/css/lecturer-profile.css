@@ -1,0 +1,124 @@
+/* ================================
+   Lecturer Profile Page Styles
+================================ */
+
+.dashboard-body {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f8fb;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 40px;
+  background: #f9fbfd;
+}
+
+/* Profile Section */
+.profile-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.profile-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  background: #fff;
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Left side (avatar) */
+.profile-left {
+  flex: 1;
+  text-align: center;
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #0078d4;
+  margin-bottom: 15px;
+  object-fit: cover;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-change {
+  background: #0078d4;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-change:hover {
+  background: #005fa3;
+}
+
+/* Right side (form) */
+.profile-right {
+  flex: 2;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-form label {
+  margin-top: 12px;
+  font-weight: 600;
+  color: #00325f;
+}
+
+.profile-form input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #cfe4f6;
+  margin-top: 4px;
+  font-size: 0.95rem;
+  transition: 0.2s ease;
+}
+
+.profile-form input:focus {
+  border-color: #0078d4;
+  outline: none;
+  box-shadow: 0 0 6px rgba(0,120,212,0.3);
+}
+
+.profile-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .profile-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-left,
+  .profile-right {
+    width: 100%;
+  }
+
+  .profile-form {
+    align-items: center;
+  }
+
+  .profile-form input {
+    width: 90%;
+  }
+}

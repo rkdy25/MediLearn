@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | MediLearn Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/dashboard.css" />
+  <link rel="stylesheet" href="../assets/css/admin-dashboard.css" />
+</head>
+<body class="dashboard-body">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="../assets/images/logo.png" alt="MediLearn Hub" class="sidebar-logo" />
+      <h2>MediLearn Hub</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="active">🏠 Dashboard</a>
+      <a href="manage-users.html">👥 Manage Users</a>
+      <a href="manage-materials.html">📂 Manage Materials</a>
+      <a href="../index.html" class="logout">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <h1>👨‍💼 Admin Dashboard</h1>
+      <p>Monitor users, manage system data, and oversee platform performance.</p>
+    </header>
+
+    <!-- Overview Cards -->
+    <section class="overview-cards">
+      <div class="overview-card">
+        <h3>Total Students</h3>
+        <p class="value">245</p>
+      </div>
+      <div class="overview-card">
+        <h3>Total Lecturers</h3>
+        <p class="value">38</p>
+      </div>
+      <div class="overview-card">
+        <h3>Total Materials</h3>
+        <p class="value">122</p>
+      </div>
+      <div class="overview-card">
+        <h3>Total Quizzes</h3>
+        <p class="value">47</p>
+      </div>
+    </section>
+
+    <!-- Management Tables -->
+    <section class="admin-section">
+      <!-- Users Table -->
+      <div class="admin-card">
+        <h2>👥 User Management</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>U1023</td>
+              <td>Dr. Sarah Williams</td>
+              <td>Lecturer</td>
+              <td>sarah@medilearn.edu</td>
+              <td><span class="status active">Active</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-ghost">Edit</button>
+                  <button class="btn btn-danger">Remove</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>U1089</td>
+              <td>John Davis</td>
+              <td>Student</td>
+              <td>john@student.medilearn.edu</td>
+              <td><span class="status inactive">Inactive</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-ghost">Edit</button>
+                  <button class="btn btn-danger">Remove</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Materials Table -->
+      <div class="admin-card">
+        <h2>📂 Uploaded Materials</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Lecturer</th>
+              <th>Type</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>M012</td>
+              <td>Cardiology Basics</td>
+              <td>Dr. Williams</td>
+              <td>PDF</td>
+              <td>2025-10-22</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-ghost">View</button>
+                  <button class="btn btn-danger">Delete</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>M019</td>
+              <td>Neuroanatomy Lecture</td>
+              <td>Dr. Chen</td>
+              <td>Video</td>
+              <td>2025-10-18</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-ghost">View</button>
+                  <button class="btn btn-danger">Delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Simulate admin actions
+    document.querySelectorAll(".btn-danger").forEach(btn => {
+      btn.addEventListener("click", () => alert("Item removed successfully!"));
+    });
+  </script>
+</body>
+</html>

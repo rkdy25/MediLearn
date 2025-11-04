@@ -1,0 +1,118 @@
+/* ================================
+   Notes Page Styles
+================================ */
+
+.dashboard-body {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f8fb;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 40px;
+  background: #f9fbfd;
+}
+
+/* Notes Section */
+.notes-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
+
+/* Note Creator */
+.note-creator {
+  flex: 1 1 350px;
+  background: white;
+  padding: 25px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.note-creator h2 {
+  color: #00325f;
+  margin-bottom: 15px;
+}
+
+.note-creator input,
+.note-creator textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid #cfe4f6;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  transition: 0.3s;
+}
+
+.note-creator input:focus,
+.note-creator textarea:focus {
+  border-color: #0078d4;
+  outline: none;
+  box-shadow: 0 0 6px rgba(0,120,212,0.3);
+}
+
+/* Saved Notes */
+.saved-notes {
+  flex: 1 1 450px;
+  background: white;
+  padding: 25px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.saved-notes h2 {
+  color: #00325f;
+  margin-bottom: 15px;
+}
+
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.note-card {
+  background: #f6f9fc;
+  border: 1.5px solid #d0e6ff;
+  border-radius: 12px;
+  padding: 15px 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s;
+}
+
+.note-card:hover {
+  transform: translateY(-3px);
+}
+
+.note-card h3 {
+  color: #00457c;
+  margin-bottom: 5px;
+}
+
+.note-card p {
+  color: #445b6e;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.note-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .notes-section {
+    flex-direction: column;
+  }
+
+  .note-creator,
+  .saved-notes {
+    width: 100%;
+  }
+}

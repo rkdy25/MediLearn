@@ -1,0 +1,199 @@
+/* ==========================================
+   MediLearn Hub — Guest Mini Quiz (Polished)
+========================================== */
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #f9fbfd;
+  color: #00325f;
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(120deg, #005fa3 0%, #003d73 100%);
+  color: #fff;
+  padding: 60px 20px;
+}
+
+.hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero-content {
+  flex: 1 1 400px;
+}
+
+.hero-content h1 {
+  font-size: 1.9rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.hero-content p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 460px;
+  color: #e6f1ff;
+}
+
+.hero-image {
+  flex: 1 1 300px;
+  text-align: center;
+}
+
+.hero-image img {
+  max-width: 80%;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Quiz Section */
+.quiz-preview {
+  padding: 60px 20px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.quiz-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 25px 30px;
+  margin-bottom: 25px;
+  transition: 0.3s ease;
+}
+
+.quiz-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.quiz-card h2 {
+  color: #00325f;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.quiz-card p {
+  color: #4a5b6d;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.quiz-options {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.option {
+  background: #f0f7ff;
+  border: 1px solid #c6e2ff;
+  border-radius: 6px;
+  padding: 10px;
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #00325f;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.option:hover {
+  background: #0078d4;
+  color: #fff;
+}
+
+/* Locked Card */
+.locked-card {
+  position: relative;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 40px 30px;
+  text-align: center;
+  color: #00325f;
+  overflow: hidden;
+}
+
+.lock-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 30, 60, 0.8);
+  backdrop-filter: blur(2px);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.lock-overlay i {
+  font-size: 1.8rem;
+  margin-bottom: 6px;
+}
+
+/* CTA */
+.cta {
+  background: #002b55;
+  color: #fff;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.cta h2 {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+.cta p {
+  color: #dbe9ff;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+  font-size: 0.9rem;
+}
+
+.btn-primary {
+  background: #0078d4;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #005fa3;
+}
+
+/* Responsive */
+@media (max-width: 950px) {
+  .hero-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .quiz-card {
+    padding: 20px;
+  }
+}

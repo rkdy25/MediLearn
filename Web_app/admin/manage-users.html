@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Users | MediLearn Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/dashboard.css" />
+  <link rel="stylesheet" href="../assets/css/admin-manage-users.css" />
+</head>
+<body class="dashboard-body">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="../assets/images/logo.png" alt="MediLearn Hub" class="sidebar-logo" />
+      <h2>MediLearn Hub</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html">🏠 Dashboard</a>
+      <a href="manage-users.html" class="active">👥 Manage Users</a>
+      <a href="manage-materials.html">📂 Manage Materials</a>
+      <a href="../index.html" class="logout">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <h1>👥 Manage Users</h1>
+      <p>Add, edit, or remove users from the MediLearn system.</p>
+    </header>
+
+    <section class="admin-section">
+      <!-- Add User Form -->
+      <div class="admin-card add-user-card">
+        <h2>Add New User</h2>
+        <form class="user-form" id="addUserForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="userName">Full Name</label>
+              <input type="text" id="userName" placeholder="Enter full name" required />
+            </div>
+            <div class="form-group">
+              <label for="userEmail">Email</label>
+              <input type="email" id="userEmail" placeholder="Enter email" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="userRole">Role</label>
+              <select id="userRole" required>
+                <option value="">Select role</option>
+                <option value="student">Student</option>
+                <option value="lecturer">Lecturer</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="userStatus">Status</label>
+              <select id="userStatus" required>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Add User</button>
+        </form>
+      </div>
+
+      <!-- Users List -->
+      <div class="admin-card user-list-card">
+        <h2>Existing Users</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="userTable">
+            <tr>
+              <td>U101</td>
+              <td>Sarah Johnson</td>
+              <td>sarah@medilearn.edu</td>
+              <td><span class="role lecturer">Lecturer</span></td>
+              <td><span class="status active">Active</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-ghost">Edit</button>
+                  <button class="btn btn-danger">Delete</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>U103</td>
+              <td>Michael Lee</td>
+              <td>michael@student.medilearn.edu</td>
+              <td><span class="role student">Student</span></td>
+              <td><span class="status inactive">Inactive</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-ghost">Edit</button>
+                  <button class="btn btn-danger">Delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Simple JS simulation
+    document.getElementById('addUserForm').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('✅ User added successfully!');
+      e.target.reset();
+    });
+
+    document.querySelectorAll('.btn-danger').forEach(btn => {
+      btn.addEventListener('click', () => alert('❌ User deleted successfully!'));
+    });
+  </script>
+</body>
+</html>

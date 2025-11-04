@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz | MediLearn Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/dashboard.css" />
+  <link rel="stylesheet" href="../assets/css/quiz.css" />
+</head>
+<body class="dashboard-body">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="../assets/images/logo.png" alt="MediLearn Hub" class="sidebar-logo" />
+      <h2>MediLearn Hub</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="student-dashboard.html">🏠 Dashboard</a>
+      <a href="profile.html">👤 Profile</a>
+      <a href="materials.html">📚 Learning Materials</a>
+      <a href="quiz.html" class="active">🧠 Quizzes</a>
+      <a href="anatomy.html">👨🏽‍🔬 3D Anatomy</a>
+      <a href="notes.html">📝 My Notes</a>
+      <a href="../index.html" class="logout">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <h1>🧠 Medical Quiz</h1>
+      <p>Test your knowledge and see how much you’ve learned.</p>
+    </header>
+
+    <section class="quiz-section">
+      <div class="quiz-card">
+        <div class="quiz-top">
+          <h2 class="question-count">Question 1 of 3</h2>
+          <div class="quiz-progress">
+            <div class="progress-bar"></div>
+          </div>
+        </div>
+
+        <div class="quiz-question">
+          <h3>What is the normal resting heart rate of an adult?</h3>
+          <ul class="quiz-options">
+            <li><input type="radio" name="q1" id="opt1" /><label for="opt1">30–50 bpm</label></li>
+            <li><input type="radio" name="q1" id="opt2" /><label for="opt2">60–100 bpm</label></li>
+            <li><input type="radio" name="q1" id="opt3" /><label for="opt3">100–120 bpm</label></li>
+            <li><input type="radio" name="q1" id="opt4" /><label for="opt4">120–150 bpm</label></li>
+          </ul>
+        </div>
+
+        <div class="quiz-actions">
+          <button class="btn btn-ghost">Previous</button>
+          <button class="btn btn-primary">Next</button>
+        </div>
+
+        <div class="quiz-submit">
+          <button class="btn btn-primary">Submit Quiz</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const progress = document.querySelector(".progress-bar");
+    progress.style.width = "33%";
+  </script>
+</body>
+</html>

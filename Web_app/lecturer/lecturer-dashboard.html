@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lecturer Dashboard | MediLearn Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/dashboard.css" />
+  <link rel="stylesheet" href="../assets/css/lecturer.css" />
+</head>
+<body class="dashboard-body">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="../assets/images/logo.png" alt="MediLearn Hub" class="sidebar-logo" />
+      <h2>MediLearn Hub</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="lecturer-dashboard.html" class="active">🏠 Dashboard</a>
+      <a href="profile.html" class="active">👤 Profile</a>
+      <a href="upload-materials.html">📂 Upload Materials</a>
+      <a href="create-quiz.html">🧠 Create Quiz</a>
+      <a href="search-resources.html" class="active">🔍 Search Resources</a>
+      <a href="../index.html" class="logout">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <h1>👩‍🏫 Lecturer Dashboard</h1>
+      <p>Manage your teaching content, quizzes, and track student learning progress.</p>
+    </header>
+
+    <section class="lecturer-section">
+      <!-- Upload Materials -->
+      <div class="lecturer-card">
+        <h2>📚 Upload Learning Materials</h2>
+        <form class="upload-form">
+          <label for="material-title">Title</label>
+          <input type="text" id="material-title" placeholder="Enter material title..." required />
+
+          <label for="material-file">Select File</label>
+          <input type="file" id="material-file" accept=".pdf,.pptx,.mp4,.docx" required />
+
+          <label for="material-desc">Description</label>
+          <textarea id="material-desc" placeholder="Short description of the material..." rows="4"></textarea>
+
+          <button type="submit" class="btn btn-primary">Upload Material</button>
+        </form>
+      </div>
+
+      <!-- Create Quiz -->
+      <div class="lecturer-card">
+        <h2>🧠 Create a Quiz</h2>
+        <form class="quiz-form">
+          <label for="quiz-title">Quiz Title</label>
+          <input type="text" id="quiz-title" placeholder="Enter quiz title..." required />
+
+          <label for="quiz-question">Question</label>
+          <textarea id="quiz-question" placeholder="Enter a question..." rows="3"></textarea>
+
+          <label>Options</label>
+          <input type="text" placeholder="Option A" />
+          <input type="text" placeholder="Option B" />
+          <input type="text" placeholder="Option C" />
+          <input type="text" placeholder="Option D" />
+
+          <label for="quiz-answer">Correct Answer</label>
+          <select id="quiz-answer">
+            <option value="">Select answer...</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+            <option>D</option>
+          </select>
+
+          <button type="submit" class="btn btn-primary">Add Question</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.querySelector('.upload-form').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Material uploaded successfully!');
+    });
+
+    document.querySelector('.quiz-form').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Quiz question added successfully!');
+    });
+  </script>
+</body>
+</html>
+

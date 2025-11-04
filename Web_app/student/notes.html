@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Notes | MediLearn Hub</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/dashboard.css" />
+  <link rel="stylesheet" href="../assets/css/notes.css" />
+</head>
+<body class="dashboard-body">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="../assets/images/logo.png" alt="MediLearn Hub" class="sidebar-logo" />
+      <h2>MediLearn Hub</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="student-dashboard.html">🏠 Dashboard</a>
+      <a href="profile.html">👤 Profile</a>
+      <a href="materials.html">📚 Learning Materials</a>
+      <a href="quiz.html">🧠 Quizzes</a>
+      <a href="anatomy.html">👨🏽‍🔬 3D Anatomy</a>
+      <a href="notes.html" class="active">📝 My Notes</a>
+      <a href="../index.html" class="logout">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="dashboard-main">
+    <header class="dashboard-header">
+      <h1>📝 My Notes</h1>
+      <p>Write, save, and organize your study notes easily.</p>
+    </header>
+
+    <section class="notes-section">
+      <!-- Note Creator -->
+      <div class="note-creator">
+        <h2>Create a New Note</h2>
+        <input type="text" id="note-title" placeholder="Note Title..." />
+        <textarea id="note-content" placeholder="Write your notes here..." rows="6"></textarea>
+        <button class="btn btn-primary" id="save-note">Save Note</button>
+      </div>
+
+      <!-- Saved Notes -->
+      <div class="saved-notes">
+        <h2>Saved Notes</h2>
+        <div class="notes-list">
+          <div class="note-card">
+            <h3>Cardiology — ECG Basics</h3>
+            <p>Normal ECG waves: P, QRS, T. The PR interval represents atrial depolarization...</p>
+            <div class="note-actions">
+              <button class="btn btn-ghost">Edit</button>
+              <button class="btn btn-primary">Delete</button>
+            </div>
+          </div>
+
+          <div class="note-card">
+            <h3>Anatomy — Human Brain</h3>
+            <p>The cerebrum is responsible for higher brain functions such as thought and action...</p>
+            <div class="note-actions">
+              <button class="btn btn-ghost">Edit</button>
+              <button class="btn btn-primary">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Simple example JS (fake note add for now)
+    document.getElementById('save-note').addEventListener('click', () => {
+      alert('Note saved successfully!');
+    });
+  </script>
+</body>
+</html>

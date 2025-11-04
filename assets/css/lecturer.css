@@ -1,0 +1,92 @@
+/* ================================
+   Lecturer Dashboard Styles
+================================ */
+
+.dashboard-body {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f8fb;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 40px;
+  background: #f9fbfd;
+}
+
+/* Section layout */
+.lecturer-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+/* Card containers */
+.lecturer-card {
+  flex: 1 1 450px;
+  background: #ffffff;
+  padding: 30px 35px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.lecturer-card h2 {
+  color: #00325f;
+  margin-bottom: 15px;
+}
+
+/* Forms */
+.upload-form,
+.quiz-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-form label,
+.quiz-form label {
+  font-weight: 600;
+  margin-top: 10px;
+  color: #00457c;
+}
+
+.upload-form input,
+.quiz-form input,
+.upload-form textarea,
+.quiz-form textarea,
+.quiz-form select {
+  padding: 10px 12px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1.5px solid #cfe4f6;
+  font-size: 0.95rem;
+  transition: 0.3s ease;
+}
+
+.upload-form input:focus,
+.quiz-form input:focus,
+.upload-form textarea:focus,
+.quiz-form textarea:focus,
+.quiz-form select:focus {
+  border-color: #0078d4;
+  outline: none;
+  box-shadow: 0 0 6px rgba(0,120,212,0.3);
+}
+
+.upload-form button,
+.quiz-form button {
+  margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .lecturer-section {
+    flex-direction: column;
+  }
+
+  .lecturer-card {
+    width: 100%;
+  }
+}
