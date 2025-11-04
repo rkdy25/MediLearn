@@ -35,7 +35,7 @@ namespace WebApplication.student
                 // Insert new note
                 using (SqlConnection con = new SqlConnection(cs))
                 {
-                    SqlCommand cmd = new SqlCommand("INSERT INTO Notes (UserID, Title, Content, CreatedAt) VALUES (@UserID, @Title, @Content, GETDATE())", con);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO Notes (UserID, Title, Content, CreatedDate) VALUES (@UserID, @Title, @Content, GETDATE())", con);
                     cmd.Parameters.AddWithValue("@UserID", Session["UserID"]);
                     cmd.Parameters.AddWithValue("@Title", txtNoteTitle.Text);
                     cmd.Parameters.AddWithValue("@Content", txtNoteContent.Text);
