@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="../assets/css/guest-quiz.css" />
 </head>
 <body>
-
   <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
@@ -18,7 +17,6 @@
         <img src="../assets/images/logo.png" alt="MediLearn Hub logo" class="logo">
         <span class="brand-name">MediLearn Hub</span>
       </a>
-
       <nav class="main-nav">
         <ul>
           <li><a href="../index.aspx">Home</a></li>
@@ -35,7 +33,7 @@
     <div class="container hero-inner">
       <div class="hero-content">
         <h1>Mini Medical Quiz (Guest Preview)</h1>
-        <p>Try a short quiz and experience the interactive learning environment. Registered users get full access to topic-based quizzes and progress tracking.</p>
+        <p>Try a short quiz and experience interactive learning. Registered users get full access to topic-based quizzes and progress tracking.</p>
       </div>
       <div class="hero-image">
         <img src="../assets/images/quiz-banner.png" alt="Quiz illustration">
@@ -46,28 +44,17 @@
   <!-- Quiz Preview -->
   <section class="quiz-preview">
     <div class="container">
-
-      <div class="quiz-card">
-        <h2>Question 1</h2>
-        <p>Which chamber of the heart receives oxygenated blood from the lungs?</p>
-        <ul class="quiz-options">
-          <li><button class="option">Right Atrium</button></li>
-          <li><button class="option">Left Atrium</button></li>
-          <li><button class="option">Right Ventricle</button></li>
-          <li><button class="option">Left Ventricle</button></li>
-        </ul>
-      </div>
-
-      <div class="quiz-card">
-        <h2>Question 2</h2>
-        <p>What is the functional unit of the kidney?</p>
-        <ul class="quiz-options">
-          <li><button class="option">Neuron</button></li>
-          <li><button class="option">Nephron</button></li>
-          <li><button class="option">Alveolus</button></li>
-          <li><button class="option">Glomerulus</button></li>
-        </ul>
-      </div>
+      <asp:Repeater ID="rptQuestions" runat="server">
+        <ItemTemplate>
+          <div class="quiz-card">
+            <h2><%# "Question " + (Container.ItemIndex + 1) %></h2>
+            <p><%# Eval("QuestionText") %></p>
+            <ul class="quiz-options">
+              <%# Eval("ChoicesHtml") %>
+            </ul>
+          </div>
+        </ItemTemplate>
+      </asp:Repeater>
 
       <div class="locked-card">
         <div class="lock-overlay">
@@ -77,7 +64,6 @@
         <h2>More Questions Locked</h2>
         <p>Register or login to access complete topic quizzes and track your progress.</p>
       </div>
-
     </div>
   </section>
 
@@ -86,7 +72,6 @@
     <div class="container">
       <h2>Continue Your Learning Journey</h2>
       <p>Sign up to access full-length quizzes, answer tracking, and personalized feedback.</p>
-      
     </div>
   </section>
 
@@ -107,7 +92,21 @@
   </footer>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // handle clicks
+      document.addEventListener("click", function (e) {
+          if (e.target.classList.contains("option")) {
+              const isCorrect = e.target.dataset.correct === "true";
+              if (isCorrect) {
+                  alert("✅ Correct!");
+                  e.target.classList.add("correct");
+              } else {
+                  alert("❌ Wrong!");
+                  e.target.classList.add("wrong");
+              }
+          }
+      });
   </script>
 </body>
 </html>

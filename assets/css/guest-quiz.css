@@ -197,3 +197,17 @@ body {
     padding: 20px;
   }
 }
+
+.quiz-preview .card {
+    border-radius: 12px;
+    transition: transform 0.2s ease;
+}
+
+    .quiz-preview .card:hover {
+        transform: translateY(-4px);
+    }
+
+.quiz-preview .btn-outline-primary {
+    border-radius: 8px;
+}
+
