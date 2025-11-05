@@ -20,12 +20,11 @@
                 <h2>MediLearn Hub</h2>
             </div>
             <nav class="sidebar-nav">
-                <a href="profile.aspx" class="active">👤 Profile</a>
-                <a href="upload-materials.aspx">📂 Upload Materials</a>
-                <a href="create-quiz.aspx">🧠 Create Quiz</a>
-                <a href="search-resources.aspx">🔍 Search Resources</a>
-                <a href="../index.aspx" class="logout">🚪 Logout</a>
-            </nav>
+                            <a href="profile.aspx"class="active">👤 Profile</a>
+<a href="my-courses.aspx" >📘 Manage Courses</a>
+<a href="search-resources.aspx">🔍 Search Resources</a>
+<a href="../index.aspx">🚪 Logout</a>
+                        </nav>
         </aside>
 
         <!-- Main Content -->

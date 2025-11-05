@@ -23,6 +23,8 @@
                 <a href="dashboard.aspx" class="active">🏠 Dashboard</a>
                 <a href="manage-users.aspx">👥 Manage Users</a>
                 <a href="manage-materials.aspx">📂 Manage Materials</a>
+                <a href="manage-courses.aspx">📚 Manage Courses</a>
+                <a href="manage-enrollments.aspx">📝 Enrollments</a>
                 <a href="../index.aspx" class="logout">🚪 Logout</a>
             </nav>
         </aside>

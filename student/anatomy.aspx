@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3D Anatomy | MediLearn Hub</title>
-    <link rel="stylesheet" href="../assets/css/style.css" />
+   
     <link rel="stylesheet" href="../assets/css/dashboard.css" />
     <link rel="stylesheet" href="../assets/css/anatomy.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -24,13 +24,14 @@
                 </div>
                 <nav class="sidebar-nav">
                     <a href="student-dashboard.aspx">🏠 Dashboard</a>
-                    <a href="student-profile.aspx">👤 Profile</a>
-                    <a href="materials.aspx">📚 Learning Materials</a>
-                    <a href="quiz.aspx">🧠 Quizzes</a>
-                    <a href="anatomy.aspx" class="active">👨🏽‍🔬 3D Anatomy</a>
-                    <a href="notes.aspx">📝 My Notes</a>
-                    <a href="quiz-summary.aspx">🥇 Quizz results summary</a>
-                    <a href="../index.aspx" class="logout">🚪 Logout</a>
+<a href="courses.aspx" class="active">📚 My Courses</a>
+<a href="profile.aspx">👤 Profile</a>
+<a href="materials.aspx">📖 Materials</a>
+<a href="quiz.aspx">🧠 Quizzes</a>
+<a href="anatomy.aspx" class="active">👨🏽‍🔬 3D Anatomy</a>
+<a href="notes.aspx">📝 My Notes</a>
+<a href="quiz-summary.aspx">🥇 Results</a>
+<a href="../index.aspx" class="logout">🚪 Logout</a
                 </nav>
             </aside>
 

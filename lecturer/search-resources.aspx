@@ -21,10 +21,9 @@
             </div>
             <nav class="sidebar-nav">
                 <a href="profile.aspx">👤 Profile</a>
-                <a href="upload-materials.aspx">📂 Upload Materials</a>
-                <a href="create-quiz.aspx">🧠 Create Quiz</a>
-                <a href="search-resources.aspx" class="active">🔍 Search Resources</a>
-                <a href="../index.aspx" class="logout">🚪 Logout</a>
+<a href="my-courses.aspx">📘 Manage Courses</a>
+<a href="search-resources.aspx" class="active">🔍 Search Resources</a>
+<a href="../index.aspx">🚪 Logout</a>
             </nav>
         </aside>
 

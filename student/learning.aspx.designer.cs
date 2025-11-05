@@ -11,7 +11,7 @@ namespace WebApplication.student
 {
 
 
-    public partial class student_dashboard
+    public partial class learning
     {
 
         /// <summary>
@@ -24,75 +24,111 @@ namespace WebApplication.student
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// lblStudentName control.
+        /// lblCourseTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStudentName;
+        protected global::System.Web.UI.WebControls.Label lblCourseTitle;
 
         /// <summary>
-        /// lblEnrolledCourses control.
+        /// lblCourseDesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEnrolledCourses;
+        protected global::System.Web.UI.WebControls.Label lblCourseDesc;
 
         /// <summary>
-        /// lblCompletedCourses control.
+        /// pnlNoMaterials control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCompletedCourses;
+        protected global::System.Web.UI.WebControls.Panel pnlNoMaterials;
 
         /// <summary>
-        /// lblMaterialsAvailable control.
+        /// rptMaterials control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMaterialsAvailable;
+        protected global::System.Web.UI.WebControls.Repeater rptMaterials;
 
         /// <summary>
-        /// rptCourses control.
+        /// btnPrevMat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptCourses;
+        protected global::System.Web.UI.WebControls.Button btnPrevMat;
 
         /// <summary>
-        /// lblNoCourses control.
+        /// lblPageMat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNoCourses;
+        protected global::System.Web.UI.WebControls.Label lblPageMat;
 
         /// <summary>
-        /// rptLatestMaterials control.
+        /// btnNextMat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptLatestMaterials;
+        protected global::System.Web.UI.WebControls.Button btnNextMat;
 
         /// <summary>
-        /// lblNoMaterials control.
+        /// pnlNoQuizzes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNoMaterials;
+        protected global::System.Web.UI.WebControls.Panel pnlNoQuizzes;
+
+        /// <summary>
+        /// rptQuizzes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptQuizzes;
+
+        /// <summary>
+        /// btnPrevQuiz control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPrevQuiz;
+
+        /// <summary>
+        /// lblPageQuiz control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPageQuiz;
+
+        /// <summary>
+        /// btnNextQuiz control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNextQuiz;
     }
 }

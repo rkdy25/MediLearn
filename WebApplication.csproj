@@ -62,6 +62,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\dashboard.aspx" />
+    <Content Include="admin\manage-courses.aspx" />
+    <Content Include="admin\manage-enrollments.aspx" />
     <Content Include="admin\manage-materials.aspx" />
     <Content Include="admin\manage-users.aspx" />
     <Content Include="App_Data\Database1.mdf" />
@@ -69,6 +71,7 @@
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
     <Content Include="assets\css\admin-dashboard.css" />
+    <Content Include="assets\css\admin-manage-course.css" />
     <Content Include="assets\css\admin-manage-materials.css" />
     <Content Include="assets\css\admin-manage-users.css" />
     <Content Include="assets\css\anatomy.css" />
@@ -78,6 +81,7 @@
     <Content Include="assets\css\guest-quiz.css" />
     <Content Include="assets\css\guest-resources.css" />
     <Content Include="assets\css\guest-search.css" />
+    <Content Include="assets\css\learning.css" />
     <Content Include="assets\css\lecturer-profile.css" />
     <Content Include="assets\css\lecturer.css" />
     <Content Include="assets\css\materials.css" />
@@ -108,6 +112,8 @@
     <Content Include="guest\resources.aspx" />
     <Content Include="index.aspx" />
     <Content Include="lecturer\create-quiz.aspx" />
+    <Content Include="lecturer\edit-quiz.aspx" />
+    <Content Include="lecturer\my-courses.aspx" />
     <Content Include="lecturer\profile.aspx" />
     <Content Include="lecturer\search-resources.aspx" />
     <Content Include="lecturer\upload-materials.aspx" />
@@ -115,6 +121,8 @@
     <Content Include="login.aspx" />
     <Content Include="admin\register.aspx" />
     <Content Include="student\anatomy.aspx" />
+    <Content Include="student\courses.aspx" />
+    <Content Include="student\learning.aspx" />
     <Content Include="student\materials.aspx" />
     <Content Include="student\notes.aspx" />
     <Content Include="student\profile.aspx" />
@@ -131,6 +139,20 @@
     </Compile>
     <Compile Include="admin\dashboard.aspx.designer.cs">
       <DependentUpon>dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\manage-courses.aspx.cs">
+      <DependentUpon>manage-courses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\manage-courses.aspx.designer.cs">
+      <DependentUpon>manage-courses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\manage-enrollments.aspx.cs">
+      <DependentUpon>manage-enrollments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\manage-enrollments.aspx.designer.cs">
+      <DependentUpon>manage-enrollments.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\manage-materials.aspx.cs">
       <DependentUpon>manage-materials.aspx</DependentUpon>
@@ -181,6 +203,20 @@
     <Compile Include="lecturer\create-quiz.aspx.designer.cs">
       <DependentUpon>create-quiz.aspx</DependentUpon>
     </Compile>
+    <Compile Include="lecturer\edit-quiz.aspx.cs">
+      <DependentUpon>edit-quiz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="lecturer\edit-quiz.aspx.designer.cs">
+      <DependentUpon>edit-quiz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="lecturer\my-courses.aspx.cs">
+      <DependentUpon>my-courses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="lecturer\my-courses.aspx.designer.cs">
+      <DependentUpon>my-courses.aspx</DependentUpon>
+    </Compile>
     <Compile Include="lecturer\profile.aspx.cs">
       <DependentUpon>profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -230,6 +266,20 @@
     </Compile>
     <Compile Include="student\anatomy.aspx.designer.cs">
       <DependentUpon>anatomy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="student\courses.aspx.cs">
+      <DependentUpon>courses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student\courses.aspx.designer.cs">
+      <DependentUpon>courses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="student\learning.aspx.cs">
+      <DependentUpon>learning.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student\learning.aspx.designer.cs">
+      <DependentUpon>learning.aspx</DependentUpon>
     </Compile>
     <Compile Include="student\materials.aspx.cs">
       <DependentUpon>materials.aspx</DependentUpon>

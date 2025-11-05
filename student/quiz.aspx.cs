@@ -12,7 +12,7 @@ namespace WebApplication.student
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["MediLearnDB"].ConnectionString;
 
-        // Store quiz data in ViewState
+        // Track quiz data
         private List<QuizQuestionData> QuizQuestions
         {
             get
@@ -55,25 +55,47 @@ namespace WebApplication.student
             }
         }
 
+        // ✅ Check if there is an ongoing quiz
+        private bool HasActiveQuiz
+        {
+            get
+            {
+                return Session["CurrentAttemptID"] != null;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                // Check if student is logged in
+                // Authentication
                 if (Session["UserID"] == null || Session["Role"] == null)
                 {
                     Response.Redirect("../index.aspx");
                     return;
                 }
 
-                string userRole = Session["Role"].ToString().Trim();
-                if (!userRole.Equals("Student", StringComparison.OrdinalIgnoreCase))
+                if (!Session["Role"].ToString().Trim().Equals("Student", StringComparison.OrdinalIgnoreCase))
                 {
                     Response.Redirect("../index.aspx");
                     return;
                 }
 
                 LoadAvailableQuizzes();
+
+                if (HasActiveQuiz)
+                {
+                    // Show ongoing quiz
+                    ddlQuizList.Enabled = false;
+                    btnStartQuiz.Enabled = false;
+                    quizContainer.Visible = true;
+                    DisplayCurrentQuestion();
+                    ShowMessage("You must submit your current quiz before starting a new one.");
+                }
+                else
+                {
+                    quizContainer.Visible = false;
+                }
             }
         }
 
@@ -87,30 +109,32 @@ namespace WebApplication.student
                 "ORDER BY q.[CreatedDate] DESC";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                ddlQuizList.Items.Clear();
+                ddlQuizList.Items.Add(new ListItem("-- Select a Quiz --", "0"));
+
+                while (reader.Read())
                 {
-                    conn.Open();
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    ddlQuizList.Items.Clear();
-                    ddlQuizList.Items.Add(new ListItem("-- Select a Quiz --", "0"));
-
-                    while (reader.Read())
-                    {
-                        string quizId = reader["QuizID"].ToString();
-                        string title = reader["Title"].ToString();
-                        string lecturer = reader["LecturerName"].ToString();
-                        string displayText = title + " (by " + lecturer + ")";
-
-                        ddlQuizList.Items.Add(new ListItem(displayText, quizId));
-                    }
+                    string quizId = reader["QuizID"].ToString();
+                    string title = reader["Title"].ToString();
+                    string lecturer = reader["LecturerName"].ToString();
+                    ddlQuizList.Items.Add(new ListItem($"{title} (by {lecturer})", quizId));
                 }
             }
         }
 
         protected void btnStartQuiz_Click(object sender, EventArgs e)
         {
+            if (HasActiveQuiz)
+            {
+                ShowMessage("You must submit your current quiz before starting a new one.");
+                return;
+            }
+
             if (ddlQuizList.SelectedValue == "0")
             {
                 ShowMessage("Please select a quiz to start.");
@@ -120,35 +144,25 @@ namespace WebApplication.student
             int quizID = Convert.ToInt32(ddlQuizList.SelectedValue);
             int studentID = Convert.ToInt32(Session["UserID"]);
 
-            try
+            int attemptCount = GetAttemptCount(quizID, studentID);
+            if (attemptCount >= 3)
             {
-                // 🔹 Check if student already has 3 attempts for this quiz
-                int attemptCount = GetAttemptCount(quizID, studentID);
-                if (attemptCount >= 3)
-                {
-                    ShowMessage("You have reached the maximum of 3 attempts for this quiz.");
-                    return;
-                }
-
-                // 🔹 Create new attempt
-                int attemptID = CreateQuizAttempt(quizID, studentID);
-                Session["CurrentAttemptID"] = attemptID;
-
-                // 🔹 Load quiz questions
-                LoadQuizQuestions(quizID);
-
-                // 🔹 Initialize session values
-                CurrentQuestionIndex = 0;
-                StudentAnswers = new Dictionary<int, int>();
-
-                // 🔹 Show quiz
-                quizContainer.Visible = true;
-                DisplayCurrentQuestion();
+                ShowMessage("You have reached the maximum of 3 attempts for this quiz.");
+                return;
             }
-            catch (Exception ex)
-            {
-                ShowMessage("Error starting quiz: " + ex.Message);
-            }
+
+            int attemptID = CreateQuizAttempt(quizID, studentID);
+            Session["CurrentAttemptID"] = attemptID;
+
+            LoadQuizQuestions(quizID);
+            CurrentQuestionIndex = 0;
+            StudentAnswers = new Dictionary<int, int>();
+
+            quizContainer.Visible = true;
+            DisplayCurrentQuestion();
+
+            ddlQuizList.Enabled = false;
+            btnStartQuiz.Enabled = false;
         }
 
         private int GetAttemptCount(int quizID, int studentID)
@@ -156,99 +170,78 @@ namespace WebApplication.student
             string query = "SELECT COUNT(*) FROM [dbo].[QuizAttempts] WHERE [QuizID] = @QuizID AND [StudentID] = @StudentID";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@QuizID", quizID);
-                    cmd.Parameters.AddWithValue("@StudentID", studentID);
+                cmd.Parameters.AddWithValue("@QuizID", quizID);
+                cmd.Parameters.AddWithValue("@StudentID", studentID);
 
-                    conn.Open();
-                    return Convert.ToInt32(cmd.ExecuteScalar());
-                }
+                conn.Open();
+                return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
-
 
         private int CreateQuizAttempt(int quizID, int studentID)
         {
             string query = @"
-        INSERT INTO [dbo].[QuizAttempts] ([QuizID], [StudentID], [StartTime])
-        VALUES (@QuizID, @StudentID, GETDATE());
-        SELECT SCOPE_IDENTITY();";
+                INSERT INTO [dbo].[QuizAttempts] ([QuizID], [StudentID], [StartTime])
+                VALUES (@QuizID, @StudentID, GETDATE());
+                SELECT SCOPE_IDENTITY();";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@QuizID", quizID);
-                    cmd.Parameters.AddWithValue("@StudentID", studentID);
+                cmd.Parameters.AddWithValue("@QuizID", quizID);
+                cmd.Parameters.AddWithValue("@StudentID", studentID);
 
-                    conn.Open();
-                    return Convert.ToInt32(cmd.ExecuteScalar());
-                }
+                conn.Open();
+                return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
-
 
         private void LoadQuizQuestions(int quizID)
         {
             List<QuizQuestionData> questions = new List<QuizQuestionData>();
-
-            string query =
-                "SELECT q.[QuestionID], q.[QuestionText], q.[Points] " +
-                "FROM [dbo].[Questions] q " +
-                "WHERE q.[QuizID] = @QuizID " +
-                "ORDER BY q.[OrderNo], q.[QuestionID]";
+            string query = "SELECT QuestionID, QuestionText, Points FROM [dbo].[Questions] WHERE QuizID=@QuizID ORDER BY OrderNo, QuestionID";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                cmd.Parameters.AddWithValue("@QuizID", quizID);
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
-                    cmd.Parameters.AddWithValue("@QuizID", quizID);
-                    conn.Open();
-
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    QuizQuestionData q = new QuizQuestionData()
                     {
-                        QuizQuestionData question = new QuizQuestionData();
-                        question.QuestionID = Convert.ToInt32(reader["QuestionID"]);
-                        question.QuestionText = reader["QuestionText"].ToString();
-                        question.Points = Convert.ToInt32(reader["Points"]);
-                        question.Choices = new List<ChoiceData>();
+                        QuestionID = Convert.ToInt32(reader["QuestionID"]),
+                        QuestionText = reader["QuestionText"].ToString(),
+                        Points = Convert.ToInt32(reader["Points"]),
+                        Choices = new List<ChoiceData>()
+                    };
+                    questions.Add(q);
+                }
+                reader.Close();
 
-                        questions.Add(question);
-                    }
-                    reader.Close();
-
-                    // Load choices for each question
-                    foreach (QuizQuestionData question in questions)
+                foreach (QuizQuestionData q in questions)
+                {
+                    string choiceQuery = "SELECT ChoiceID, ChoiceText, IsCorrect FROM [dbo].[Choices] WHERE QuestionID=@QuestionID ORDER BY ChoiceID";
+                    using (SqlCommand choiceCmd = new SqlCommand(choiceQuery, conn))
                     {
-                        string choiceQuery =
-                            "SELECT [ChoiceID], [ChoiceText], [IsCorrect] " +
-                            "FROM [dbo].[Choices] " +
-                            "WHERE [QuestionID] = @QuestionID " +
-                            "ORDER BY [ChoiceID]";
-
-                        using (SqlCommand choiceCmd = new SqlCommand(choiceQuery, conn))
+                        choiceCmd.Parameters.AddWithValue("@QuestionID", q.QuestionID);
+                        SqlDataReader choiceReader = choiceCmd.ExecuteReader();
+                        while (choiceReader.Read())
                         {
-                            choiceCmd.Parameters.AddWithValue("@QuestionID", question.QuestionID);
-
-                            SqlDataReader choiceReader = choiceCmd.ExecuteReader();
-                            while (choiceReader.Read())
+                            q.Choices.Add(new ChoiceData()
                             {
-                                ChoiceData choice = new ChoiceData();
-                                choice.ChoiceID = Convert.ToInt32(choiceReader["ChoiceID"]);
-                                choice.ChoiceText = choiceReader["ChoiceText"].ToString();
-                                choice.IsCorrect = Convert.ToBoolean(choiceReader["IsCorrect"]);
-
-                                question.Choices.Add(choice);
-                            }
-                            choiceReader.Close();
+                                ChoiceID = Convert.ToInt32(choiceReader["ChoiceID"]),
+                                ChoiceText = choiceReader["ChoiceText"].ToString(),
+                                IsCorrect = Convert.ToBoolean(choiceReader["IsCorrect"])
+                            });
                         }
+                        choiceReader.Close();
                     }
                 }
             }
-
             QuizQuestions = questions;
         }
 
@@ -260,38 +253,24 @@ namespace WebApplication.student
                 return;
             }
 
-            QuizQuestionData currentQuestion = QuizQuestions[CurrentQuestionIndex];
+            QuizQuestionData current = QuizQuestions[CurrentQuestionIndex];
+            lblQuestionCount.Text = $"Question {CurrentQuestionIndex + 1} of {QuizQuestions.Count}";
 
-            // Update question counter
-            lblQuestionCount.Text = "Question " + (CurrentQuestionIndex + 1).ToString() + " of " + QuizQuestions.Count.ToString();
+            int progress = ((CurrentQuestionIndex + 1) * 100) / QuizQuestions.Count;
+            progressBar.Style["width"] = progress + "%";
 
-            // Update progress bar
-            int progressPercent = ((CurrentQuestionIndex + 1) * 100) / QuizQuestions.Count;
-            progressBar.Style["width"] = progressPercent.ToString() + "%";
-
-            // Display question text
-            lblQuestionText.Text = currentQuestion.QuestionText;
-
-            // Load choices
+            lblQuestionText.Text = current.QuestionText;
             rblOptions.Items.Clear();
-            foreach (ChoiceData choice in currentQuestion.Choices)
+            foreach (var choice in current.Choices)
             {
-                ListItem item = new ListItem(choice.ChoiceText, choice.ChoiceID.ToString());
-                rblOptions.Items.Add(item);
+                rblOptions.Items.Add(new ListItem(choice.ChoiceText, choice.ChoiceID.ToString()));
             }
 
-            // Restore previously selected answer if exists
-            if (StudentAnswers.ContainsKey(currentQuestion.QuestionID))
+            if (StudentAnswers.ContainsKey(current.QuestionID))
             {
-                int selectedChoiceID = StudentAnswers[currentQuestion.QuestionID];
-                ListItem selectedItem = rblOptions.Items.FindByValue(selectedChoiceID.ToString());
-                if (selectedItem != null)
-                {
-                    selectedItem.Selected = true;
-                }
+                rblOptions.SelectedValue = StudentAnswers[current.QuestionID].ToString();
             }
 
-            // Show/hide navigation buttons
             btnPrevious.Visible = CurrentQuestionIndex > 0;
             btnNext.Visible = CurrentQuestionIndex < QuizQuestions.Count - 1;
             btnSubmit.Visible = CurrentQuestionIndex == QuizQuestions.Count - 1;
@@ -300,7 +279,6 @@ namespace WebApplication.student
         protected void btnNext_Click(object sender, EventArgs e)
         {
             SaveCurrentAnswer();
-
             if (CurrentQuestionIndex < QuizQuestions.Count - 1)
             {
                 CurrentQuestionIndex++;
@@ -311,7 +289,6 @@ namespace WebApplication.student
         protected void btnPrevious_Click(object sender, EventArgs e)
         {
             SaveCurrentAnswer();
-
             if (CurrentQuestionIndex > 0)
             {
                 CurrentQuestionIndex--;
@@ -323,34 +300,27 @@ namespace WebApplication.student
         {
             if (rblOptions.SelectedItem != null)
             {
-                QuizQuestionData currentQuestion = QuizQuestions[CurrentQuestionIndex];
-                int selectedChoiceID = Convert.ToInt32(rblOptions.SelectedValue);
-
-                // Store answer in dictionary
-                StudentAnswers[currentQuestion.QuestionID] = selectedChoiceID;
+                QuizQuestionData current = QuizQuestions[CurrentQuestionIndex];
+                StudentAnswers[current.QuestionID] = Convert.ToInt32(rblOptions.SelectedValue);
             }
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-
             SaveCurrentAnswer();
 
             try
             {
                 int attemptID = Convert.ToInt32(Session["CurrentAttemptID"]);
+                foreach (var ans in StudentAnswers)
+                    SaveAnswerToDatabase(attemptID, ans.Key, ans.Value);
 
-                // Save all answers to database
-                foreach (KeyValuePair<int, int> answer in StudentAnswers)
-                {
-                    SaveAnswerToDatabase(attemptID, answer.Key, answer.Value);
-                }
-
-                // Calculate score
                 decimal score = CalculateScore(attemptID);
 
-                // Redirect to results page
-                Response.Redirect("QuizResults.aspx?attemptid=" + attemptID.ToString());
+                // Clear active quiz
+                Session["CurrentAttemptID"] = null;
+
+                Response.Redirect("QuizResults.aspx?attemptid=" + attemptID);
             }
             catch (Exception ex)
             {
@@ -360,84 +330,65 @@ namespace WebApplication.student
 
         private void SaveAnswerToDatabase(int attemptID, int questionID, int choiceID)
         {
-            // Check if choice is correct
             bool isCorrect = false;
-            string checkQuery = "SELECT [IsCorrect] FROM [dbo].[Choices] WHERE [ChoiceID] = @ChoiceID";
+            string checkQuery = "SELECT IsCorrect FROM [dbo].[Choices] WHERE ChoiceID=@ChoiceID";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(checkQuery, conn))
             {
-                using (SqlCommand cmd = new SqlCommand(checkQuery, conn))
-                {
-                    cmd.Parameters.AddWithValue("@ChoiceID", choiceID);
-                    conn.Open();
-                    object result = cmd.ExecuteScalar();
-                    if (result != null)
-                    {
-                        isCorrect = Convert.ToBoolean(result);
-                    }
-                }
+                cmd.Parameters.AddWithValue("@ChoiceID", choiceID);
+                conn.Open();
+                object result = cmd.ExecuteScalar();
+                if (result != null) isCorrect = Convert.ToBoolean(result);
             }
 
-            // Insert answer
-            string insertQuery =
-                "INSERT INTO [dbo].[QuizAnswers] ([AttemptID], [QuestionID], [ChoiceID], [IsCorrect]) " +
-                "VALUES (@AttemptID, @QuestionID, @ChoiceID, @IsCorrect)";
-
+            string insertQuery = "INSERT INTO [dbo].[QuizAnswers] (AttemptID, QuestionID, ChoiceID, IsCorrect) VALUES (@AttemptID,@QuestionID,@ChoiceID,@IsCorrect)";
             using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
             {
-                using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
-                {
-                    cmd.Parameters.AddWithValue("@AttemptID", attemptID);
-                    cmd.Parameters.AddWithValue("@QuestionID", questionID);
-                    cmd.Parameters.AddWithValue("@ChoiceID", choiceID);
-                    cmd.Parameters.AddWithValue("@IsCorrect", isCorrect ? 1 : 0);
+                cmd.Parameters.AddWithValue("@AttemptID", attemptID);
+                cmd.Parameters.AddWithValue("@QuestionID", questionID);
+                cmd.Parameters.AddWithValue("@ChoiceID", choiceID);
+                cmd.Parameters.AddWithValue("@IsCorrect", isCorrect ? 1 : 0);
 
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
 
         private decimal CalculateScore(int attemptID)
         {
             string query =
-                "DECLARE @TotalPoints INT, @EarnedPoints INT, @Score DECIMAL(5,2); " +
-                "SELECT @TotalPoints = SUM(q.[Points]) " +
-                "FROM [dbo].[Questions] q " +
-                "INNER JOIN [dbo].[QuizAttempts] qa ON q.[QuizID] = qa.[QuizID] " +
-                "WHERE qa.[AttemptID] = @AttemptID; " +
-                "SELECT @EarnedPoints = ISNULL(SUM(q.[Points]), 0) " +
-                "FROM [dbo].[QuizAnswers] ans " +
-                "INNER JOIN [dbo].[Questions] q ON ans.[QuestionID] = q.[QuestionID] " +
-                "WHERE ans.[AttemptID] = @AttemptID AND ans.[IsCorrect] = 1; " +
-                "IF @TotalPoints > 0 " +
-                "    SET @Score = (CAST(@EarnedPoints AS DECIMAL(5,2)) / @TotalPoints) * 100; " +
-                "ELSE " +
-                "    SET @Score = 0; " +
-                "UPDATE [dbo].[QuizAttempts] " +
-                "SET [EndTime] = GETDATE(), [Score] = @Score, [IsSubmitted] = 1 " +
-                "WHERE [AttemptID] = @AttemptID; " +
-                "SELECT @Score;";
+                @"DECLARE @TotalPoints INT, @EarnedPoints INT, @Score DECIMAL(5,2);
+                SELECT @TotalPoints = SUM(q.Points)
+                FROM Questions q
+                INNER JOIN QuizAttempts qa ON q.QuizID = qa.QuizID
+                WHERE qa.AttemptID = @AttemptID;
+                SELECT @EarnedPoints = ISNULL(SUM(q.Points),0)
+                FROM QuizAnswers ans
+                INNER JOIN Questions q ON ans.QuestionID = q.QuestionID
+                WHERE ans.AttemptID=@AttemptID AND ans.IsCorrect=1;
+                IF @TotalPoints >0 SET @Score=(CAST(@EarnedPoints AS DECIMAL(5,2))/@TotalPoints)*100;
+                ELSE SET @Score=0;
+                UPDATE QuizAttempts SET EndTime=GETDATE(), Score=@Score, IsSubmitted=1 WHERE AttemptID=@AttemptID;
+                SELECT @Score;";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@AttemptID", attemptID);
-                    conn.Open();
-                    object result = cmd.ExecuteScalar();
-                    return result != null ? Convert.ToDecimal(result) : 0;
-                }
+                cmd.Parameters.AddWithValue("@AttemptID", attemptID);
+                conn.Open();
+                object result = cmd.ExecuteScalar();
+                return result != null ? Convert.ToDecimal(result) : 0;
             }
         }
 
         private void ShowMessage(string message)
         {
-            string script = "alert('" + message.Replace("'", "\\'") + "');";
+            string script = $"alert('{message.Replace("'", "\\'")}');";
             ScriptManager.RegisterStartupScript(this, GetType(), "ShowMessage", script, true);
         }
 
-        // Helper classes
         [Serializable]
         public class QuizQuestionData
         {

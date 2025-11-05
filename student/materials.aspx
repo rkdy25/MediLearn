@@ -50,13 +50,14 @@
     </div>
     <nav class="sidebar-nav">
       <a href="student-dashboard.aspx">🏠 Dashboard</a>
-      <a href="profile.aspx">👤 Profile</a>
-      <a href="materials.aspx" class="active">📚 Learning Materials</a>
-      <a href="quiz.aspx">🧠 Quizzes</a>
-      <a href="anatomy.aspx">👨🏽‍🔬 3D Anatomy</a>
-      <a href="notes.aspx">📝 My Notes</a>
-   <a href="quiz-summary.aspx">🥇Quizz results summary</a>
-      <a href="../index.aspx" class="logout">🚪 Logout</a>
+<a href="courses.aspx" >📚 My Courses</a>
+<a href="profile.aspx">👤 Profile</a>
+<a href="materials.aspx" class="active">📖 Materials</a>
+<a href="quiz.aspx">🧠 Quizzes</a>
+<a href="anatomy.aspx">👨🏽‍🔬 3D Anatomy</a>
+<a href="notes.aspx">📝 My Notes</a>
+<a href="quiz-summary.aspx">🥇 Results</a>
+<a href="../index.aspx" class="logout">🚪 Logout</a
     </nav>
   </aside>
 

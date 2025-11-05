@@ -20,14 +20,14 @@
     </div>
     <nav class="sidebar-nav">
       <a href="student-dashboard.aspx">🏠 Dashboard</a>
-      <a href="profile.aspx">👤 Profile</a>
-      <a href="materials.aspx">📚 Learning Materials</a>
-      <a href="quiz.aspx">🧠 Quizzes</a>
-      <a href="anatomy.aspx">👨🏽‍🔬 3D Anatomy</a>
-      <a href="notes.aspx" class="active">📝 My Notes</a>
-    <a href="quiz-summary.aspx">🥇Quizz results summary</a>
-      <a href="../index.aspx" class="logout">🚪 Logout</a>
-    </nav>
+<a href="courses.aspx" >📚 My Courses</a>
+<a href="profile.aspx">👤 Profile</a>
+<a href="materials.aspx">📖 Materials</a>
+<a href="quiz.aspx">🧠 Quizzes</a>
+<a href="anatomy.aspx">👨🏽‍🔬 3D Anatomy</a>
+<a href="notes.aspx" class="active">📝 My Notes</a>
+<a href="quiz-summary.aspx">🥇 Results</a>
+<a href="../index.aspx" class="logout">🚪 Logout</a    </nav>
   </aside>
 
   <!-- Main Content -->

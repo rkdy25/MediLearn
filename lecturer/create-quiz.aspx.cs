@@ -1,339 +1,223 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Collections.Generic;
 
 namespace WebApplication.lecturer
 {
     public partial class create_quiz : System.Web.UI.Page
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["MediLearnDB"].ConnectionString;
+        private static int TempQuizId = 0;
 
-        // Store questions temporarily in session
-        private List<QuizQuestion> QuestionList
+        protected void Page_Load(object sender, EventArgs e)
         {
-            get
+            if (Session["UserID"] == null)
             {
-                if (Session["TempQuestions"] == null)
-                    Session["TempQuestions"] = new List<QuizQuestion>();
-                return (List<QuizQuestion>)Session["TempQuestions"];
+                Response.Redirect("../login.aspx");
+                return;
             }
-            set
+
+            if (Request.QueryString["courseId"] == null)
             {
-                Session["TempQuestions"] = value;
+                Response.Redirect("my-courses.aspx");
+                return;
+            }
+
+            ViewState["CourseId"] = Convert.ToInt32(Request.QueryString["courseId"]);
+
+            if (!IsPostBack)
+            {
+                LoadQuizzes();
             }
         }
 
-            protected void Page_Load(object sender, EventArgs e)
+        private void LoadQuizzes()
         {
-            if (!IsPostBack)
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
-                // Check if user is logged in
-                if (Session["UserID"] == null || Session["Role"] == null)
-                {
-                    Response.Redirect("../index.aspx");
-                    return;
-                }
+                string query = @"
+                    SELECT q.QuizID, q.Title, q.CreatedDate, q.IsActive,
+                           COUNT(que.QuestionID) AS QuestionCount
+                    FROM Quizzes q
+                    LEFT JOIN Questions que ON q.QuizID = que.QuizID
+                    WHERE q.LecturerID = @LecturerID AND q.CourseId = @CourseId
+                    GROUP BY q.QuizID, q.Title, q.CreatedDate, q.IsActive
+                    ORDER BY q.CreatedDate DESC";
 
-                // Get role and trim any whitespace (handles NCHAR padding)
-                string userRole = Session["Role"].ToString().Trim();
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@LecturerID", Session["UserID"]);
+                cmd.Parameters.AddWithValue("@CourseId", ViewState["CourseId"]);
 
-                // Case-insensitive role check
-                if (!userRole.Equals("Lecturer", StringComparison.OrdinalIgnoreCase))
-                {
-                    Response.Redirect("../index.aspx");
-                    return;
-                }
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
 
-                LoadExistingQuizzes();
+                gvQuizzes.DataSource = dt;
+                gvQuizzes.DataBind();
             }
         }
 
         protected void btnAddQuestion_Click(object sender, EventArgs e)
         {
-            try
+            string title = txtQuizTitle.Text.Trim();
+            string question = txtQuizQuestion.Text.Trim();
+            string optionA = txtOptionA.Text.Trim();
+            string optionB = txtOptionB.Text.Trim();
+            string optionC = txtOptionC.Text.Trim();
+            string optionD = txtOptionD.Text.Trim();
+            string correct = ddlCorrectAnswer.SelectedValue;
+
+            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(question))
             {
-                // Validate inputs - .NET 3.5 COMPATIBLE
-                if (string.IsNullOrEmpty(txtQuizTitle.Text) || txtQuizTitle.Text.Trim().Length == 0)
-                {
-                    ShowMessage("Please enter a quiz title.", "error");
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(txtQuizQuestion.Text) || txtQuizQuestion.Text.Trim().Length == 0)
-                {
-                    ShowMessage("Please enter a question.", "error");
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(txtOptionA.Text) || txtOptionA.Text.Trim().Length == 0 ||
-                    string.IsNullOrEmpty(txtOptionB.Text) || txtOptionB.Text.Trim().Length == 0 ||
-                    string.IsNullOrEmpty(txtOptionC.Text) || txtOptionC.Text.Trim().Length == 0 ||
-                    string.IsNullOrEmpty(txtOptionD.Text) || txtOptionD.Text.Trim().Length == 0)
-                {
-                    ShowMessage("Please fill in all options.", "error");
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(ddlCorrectAnswer.SelectedValue))
-                {
-                    ShowMessage("Please select the correct answer.", "error");
-                    return;
-                }
-
-                // Create question object - .NET 3.5 style
-                QuizQuestion question = new QuizQuestion();
-                question.QuestionText = txtQuizQuestion.Text.Trim();
-                question.Options = new Dictionary<string, string>();
-                question.Options.Add("A", txtOptionA.Text.Trim());
-                question.Options.Add("B", txtOptionB.Text.Trim());
-                question.Options.Add("C", txtOptionC.Text.Trim());
-                question.Options.Add("D", txtOptionD.Text.Trim());
-                question.CorrectAnswer = ddlCorrectAnswer.SelectedValue;
-
-                // Add to temporary list
-                QuestionList.Add(question);
-
-                // Save to database
-                SaveQuizToDatabase(txtQuizTitle.Text.Trim());
-
-                // Clear form
-                ClearQuestionForm();
-
-                // Refresh quiz list
-                LoadExistingQuizzes();
-
-                ShowMessage("Question added successfully! Total questions: " + QuestionList.Count.ToString(), "success");
+                ShowAlert("Please fill in all required fields (title and question).");
+                return;
             }
-            catch (Exception ex)
+
+            if (string.IsNullOrEmpty(optionA) || string.IsNullOrEmpty(optionB))
             {
-                ShowMessage("Error adding question: " + ex.Message, "error");
+                ShowAlert("At least 2 options (A and B) are required.");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(correct))
+            {
+                ShowAlert("Please select the correct answer.");
+                return;
+            }
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+
+                if (TempQuizId == 0)
+                {
+                    string checkTitle = "SELECT COUNT(*) FROM Quizzes WHERE Title = @Title AND LecturerID = @LecturerID";
+                    SqlCommand cmdCheck = new SqlCommand(checkTitle, con);
+                    cmdCheck.Parameters.AddWithValue("@Title", title);
+                    cmdCheck.Parameters.AddWithValue("@LecturerID", Session["UserID"]);
+                    int exists = Convert.ToInt32(cmdCheck.ExecuteScalar());
+
+                    if (exists > 0)
+                    {
+                        ShowAlert("A quiz with this title already exists.");
+                        return;
+                    }
+
+                    string createQuiz = @"INSERT INTO Quizzes (Title, Description, LecturerID, IsActive, CreatedDate, CourseId)
+                                          OUTPUT INSERTED.QuizID
+                                          VALUES (@Title, '', @LecturerID, 0, GETDATE(), @CourseId)";
+
+                    SqlCommand cmdQuiz = new SqlCommand(createQuiz, con);
+                    cmdQuiz.Parameters.AddWithValue("@Title", title);
+                    cmdQuiz.Parameters.AddWithValue("@LecturerID", Session["UserID"]);
+                    cmdQuiz.Parameters.AddWithValue("@CourseId", ViewState["CourseId"]);
+                    TempQuizId = Convert.ToInt32(cmdQuiz.ExecuteScalar());
+
+                    txtQuizTitle.Enabled = false;
+                }
+
+                string insertQuestion = @"INSERT INTO Questions (QuizID, QuestionText, QuestionType, Points)
+                                          OUTPUT INSERTED.QuestionID
+                                          VALUES (@QuizID, @QuestionText, 'MCQ', 1)";
+                SqlCommand cmdQ = new SqlCommand(insertQuestion, con);
+                cmdQ.Parameters.AddWithValue("@QuizID", TempQuizId);
+                cmdQ.Parameters.AddWithValue("@QuestionText", question);
+                int questionId = Convert.ToInt32(cmdQ.ExecuteScalar());
+
+                InsertChoice(con, questionId, optionA, correct == "A");
+                InsertChoice(con, questionId, optionB, correct == "B");
+                if (!string.IsNullOrEmpty(optionC))
+                    InsertChoice(con, questionId, optionC, correct == "C");
+                if (!string.IsNullOrEmpty(optionD))
+                    InsertChoice(con, questionId, optionD, correct == "D");
+
+                ShowAlert("Question added successfully! Quiz title is now locked.");
+                ClearQuestionFields();
+                LoadQuizzes();
             }
         }
 
-        private void SaveQuizToDatabase(string quizTitle)
+        private void InsertChoice(SqlConnection con, int questionId, string text, bool isCorrect)
         {
-            int lecturerID = Convert.ToInt32(Session["UserID"]);
-            int quizID = 0;
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                SqlTransaction transaction = conn.BeginTransaction();
-
-                try
-                {
-                    // Check if quiz already exists in session
-                    if (Session["CurrentQuizID"] == null)
-                    {
-                        // Create new quiz
-                        string insertQuizQuery =
-                            "INSERT INTO [dbo].[Quizzes] ([Title], [Description], [LecturerID], [IsActive]) " +
-                            "VALUES (@Title, @Description, @LecturerID, 1); " +
-                            "SELECT SCOPE_IDENTITY();";
-
-                        using (SqlCommand cmd = new SqlCommand(insertQuizQuery, conn, transaction))
-                        {
-                            cmd.Parameters.AddWithValue("@Title", quizTitle);
-                            cmd.Parameters.AddWithValue("@Description", "Quiz created on " + DateTime.Now.ToString("yyyy-MM-dd"));
-                            cmd.Parameters.AddWithValue("@LecturerID", lecturerID);
-
-                            quizID = Convert.ToInt32(cmd.ExecuteScalar());
-                            Session["CurrentQuizID"] = quizID;
-                        }
-                    }
-                    else
-                    {
-                        quizID = Convert.ToInt32(Session["CurrentQuizID"]);
-
-                        // Update quiz title if changed
-                        string updateQuizQuery = "UPDATE [dbo].[Quizzes] SET [Title] = @Title WHERE [QuizID] = @QuizID";
-                        using (SqlCommand cmd = new SqlCommand(updateQuizQuery, conn, transaction))
-                        {
-                            cmd.Parameters.AddWithValue("@Title", quizTitle);
-                            cmd.Parameters.AddWithValue("@QuizID", quizID);
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-
-                    // Insert the latest question
-                    if (QuestionList.Count > 0)
-                    {
-                        QuizQuestion lastQuestion = QuestionList[QuestionList.Count - 1];
-
-                        string insertQuestionQuery =
-                            "INSERT INTO [dbo].[Questions] ([QuizID], [QuestionText], [QuestionType], [Points], [OrderNo]) " +
-                            "VALUES (@QuizID, @QuestionText, 'MCQ', 1, @OrderNo); " +
-                            "SELECT SCOPE_IDENTITY();";
-
-                        int questionID;
-                        using (SqlCommand cmd = new SqlCommand(insertQuestionQuery, conn, transaction))
-                        {
-                            cmd.Parameters.AddWithValue("@QuizID", quizID);
-                            cmd.Parameters.AddWithValue("@QuestionText", lastQuestion.QuestionText);
-                            cmd.Parameters.AddWithValue("@OrderNo", QuestionList.Count);
-
-                            questionID = Convert.ToInt32(cmd.ExecuteScalar());
-                        }
-
-                        // Insert choices
-                        string insertChoiceQuery =
-                            "INSERT INTO [dbo].[Choices] ([QuestionID], [ChoiceText], [IsCorrect]) " +
-                            "VALUES (@QuestionID, @ChoiceText, @IsCorrect);";
-
-                        foreach (KeyValuePair<string, string> option in lastQuestion.Options)
-                        {
-                            using (SqlCommand cmd = new SqlCommand(insertChoiceQuery, conn, transaction))
-                            {
-                                cmd.Parameters.AddWithValue("@QuestionID", questionID);
-                                cmd.Parameters.AddWithValue("@ChoiceText", option.Value);
-                                cmd.Parameters.AddWithValue("@IsCorrect", option.Key == lastQuestion.CorrectAnswer ? 1 : 0);
-                                cmd.ExecuteNonQuery();
-                            }
-                        }
-                    }
-
-                    transaction.Commit();
-                }
-                catch (Exception)
-                {
-                    transaction.Rollback();
-                    throw;
-                }
-            }
-        }
-
-        private void LoadExistingQuizzes()
-        {
-            int lecturerID = Convert.ToInt32(Session["UserID"]);
-
-            string query =
-                "SELECT " +
-                "    q.[QuizID], " +
-                "    q.[Title], " +
-                "    q.[CreatedDate] AS DateCreated, " +
-                "    COUNT(qs.[QuestionID]) AS QuestionCount " +
-                "FROM [dbo].[Quizzes] q " +
-                "LEFT JOIN [dbo].[Questions] qs ON q.[QuizID] = qs.[QuizID] " +
-                "WHERE q.[LecturerID] = @LecturerID " +
-                "GROUP BY q.[QuizID], q.[Title], q.[CreatedDate] " +
-                "ORDER BY q.[CreatedDate] DESC";
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@LecturerID", lecturerID);
-
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
-
-                    gvQuizzes.DataSource = dt;
-                    gvQuizzes.DataBind();
-                }
-            }
-        }
-
-        protected void gvQuizzes_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            int quizID = Convert.ToInt32(e.CommandArgument);
-
-            if (e.CommandName == "ViewQuiz")
-            {
-                // Redirect to a new page to view quiz questions
-                Response.Redirect("view-quiz.aspx?quizid=" + quizID.ToString());
-            }
-            else if (e.CommandName == "DeleteQuiz")
-            {
-                DeleteQuiz(quizID);
-                LoadExistingQuizzes();
-            }
-        }
-
-
-        private void DeleteQuiz(int quizID)
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    string deleteQuery = "DELETE FROM [dbo].[Quizzes] WHERE [QuizID] = @QuizID";
-                    using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@QuizID", quizID);
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-                ShowMessage("Quiz deleted successfully!", "success");
-            }
-            catch (Exception ex)
-            {
-                ShowMessage("Error deleting quiz: " + ex.Message, "error");
-            }
+            string insertChoice = "INSERT INTO Choices (QuestionID, ChoiceText, IsCorrect) VALUES (@QuestionID, @Text, @IsCorrect)";
+            SqlCommand cmd = new SqlCommand(insertChoice, con);
+            cmd.Parameters.AddWithValue("@QuestionID", questionId);
+            cmd.Parameters.AddWithValue("@Text", text);
+            cmd.Parameters.AddWithValue("@IsCorrect", isCorrect);
+            cmd.ExecuteNonQuery();
         }
 
         protected void btnFinishQuiz_Click(object sender, EventArgs e)
         {
-            try
-            {
-                // Clear session data
-                Session["CurrentQuizID"] = null;
-                Session["TempQuestions"] = null;
-
-                // Clear form
-                txtQuizTitle.Text = string.Empty;
-                ClearQuestionForm();
-
-                // Refresh list
-                LoadExistingQuizzes();
-
-                ShowMessage("Quiz completed successfully!", "success");
-            }
-            catch (Exception ex)
-            {
-                ShowMessage("Error finishing quiz: " + ex.Message, "error");
-            }
-        }
-
-        private void ClearQuestionForm()
-        {
-            txtQuizQuestion.Text = string.Empty;
-            txtOptionA.Text = string.Empty;
-            txtOptionB.Text = string.Empty;
-            txtOptionC.Text = string.Empty;
-            txtOptionD.Text = string.Empty;
+            TempQuizId = 0;
+            txtQuizTitle.Text = "";
+            txtQuizTitle.Enabled = true;
+            txtQuizQuestion.Text = "";
+            txtOptionA.Text = "";
+            txtOptionB.Text = "";
+            txtOptionC.Text = "";
+            txtOptionD.Text = "";
             ddlCorrectAnswer.SelectedIndex = 0;
-        }
 
-        private void ShowMessage(string message, string type)
-        {
-            string script = "alert('" + message.Replace("'", "\\'") + "');";
-            ScriptManager.RegisterStartupScript(this, GetType(), "ShowMessage", script, true);
-        }
-
-        // Helper class for temporary question storage
-        [Serializable]
-        public class QuizQuestion
-        {
-            public string QuestionText { get; set; }
-            public Dictionary<string, string> Options { get; set; }
-            public string CorrectAnswer { get; set; }
+            ShowAlert("Quiz creation completed!");
+            LoadQuizzes();
         }
 
         protected void gvQuizzes_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvQuizzes.PageIndex = e.NewPageIndex;
-            LoadExistingQuizzes();
+            LoadQuizzes();
+        }
+
+        protected void gvQuizzes_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int quizId = Convert.ToInt32(e.CommandArgument);
+
+            if (e.CommandName == "DeleteQuiz")
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("DELETE FROM Quizzes WHERE QuizID = @QuizID", con);
+                    cmd.Parameters.AddWithValue("@QuizID", quizId);
+                    cmd.ExecuteNonQuery();
+                }
+                ShowAlert("Quiz deleted successfully.");
+                LoadQuizzes();
+            }
+            else if (e.CommandName == "ToggleAvailability")
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("UPDATE Quizzes SET IsActive = CASE WHEN IsActive=1 THEN 0 ELSE 1 END WHERE QuizID=@QuizID", con);
+                    cmd.Parameters.AddWithValue("@QuizID", quizId);
+                    cmd.ExecuteNonQuery();
+                }
+                LoadQuizzes();
+            }
+            else if (e.CommandName == "EditQuiz")
+            {
+                Response.Redirect($"edit-quiz.aspx?quizId={quizId}");
+            }
+        }
+
+        private void ShowAlert(string message)
+        {
+            ScriptManager.RegisterStartupScript(this, GetType(), "alert", $"alert('{message}');", true);
+        }
+
+        private void ClearQuestionFields()
+        {
+            txtQuizQuestion.Text = "";
+            txtOptionA.Text = "";
+            txtOptionB.Text = "";
+            txtOptionC.Text = "";
+            txtOptionD.Text = "";
+            ddlCorrectAnswer.SelectedIndex = 0;
         }
     }
-
-
-
-
 }
