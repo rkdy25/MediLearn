@@ -20,9 +20,10 @@
       <nav class="main-nav">
         <ul>
           <li><a href="../index.aspx">Home</a></li>
-          <li><a href="resources.aspx">Resources</a></li>
-          <li><a href="Explore-3D.aspx">Explore 3D</a></li>
-          <li><a href="../Login.aspx" class="btn btn-primary">Login</a></li>
+<li><a href="../Login.aspx">Login </a></li>
+ <li><a href="news.aspx">Latest News</a></li>
+  <li><a href="preview-quiz.aspx" class="active">Quizzes</a></li>
+     <li><a href="explore-3d.aspx">Explore 3D</a></li>
         </ul>
       </nav>
     </div>

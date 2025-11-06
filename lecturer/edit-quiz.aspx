@@ -68,6 +68,7 @@
                 <a href="profile.aspx">👤 Profile</a>
 <a href="my-courses.aspx" class="active">📘 Manage Courses</a>
 <a href="search-resources.aspx">🔍 Search Resources</a>
+                <a href="view-grades.aspx">📊 View Grades</a>
 <a href="../index.aspx">🚪 Logout</a>
             </nav>
         </aside>

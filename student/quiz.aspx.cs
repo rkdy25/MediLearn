@@ -145,9 +145,9 @@ namespace WebApplication.student
             int studentID = Convert.ToInt32(Session["UserID"]);
 
             int attemptCount = GetAttemptCount(quizID, studentID);
-            if (attemptCount >= 3)
+            if (attemptCount >= 1)
             {
-                ShowMessage("You have reached the maximum of 3 attempts for this quiz.");
+                ShowMessage("You have already attempted this quiz.");
                 return;
             }
 

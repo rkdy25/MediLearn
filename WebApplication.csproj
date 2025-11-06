@@ -108,8 +108,8 @@
     <Content Include="assets\images\student-card.png" />
     <Content Include="assets\videos\body-3d.mp4" />
     <Content Include="guest\explore-3d.aspx" />
+    <Content Include="guest\news.aspx" />
     <Content Include="guest\preview-quiz.aspx" />
-    <Content Include="guest\resources.aspx" />
     <Content Include="index.aspx" />
     <Content Include="lecturer\create-quiz.aspx" />
     <Content Include="lecturer\edit-quiz.aspx" />
@@ -117,6 +117,7 @@
     <Content Include="lecturer\profile.aspx" />
     <Content Include="lecturer\search-resources.aspx" />
     <Content Include="lecturer\upload-materials.aspx" />
+    <Content Include="lecturer\view-grades.aspx" />
     <Content Include="lecturer\view-quiz.aspx" />
     <Content Include="login.aspx" />
     <Content Include="admin\register.aspx" />
@@ -175,19 +176,18 @@
     <Compile Include="guest\explore-3d.aspx.designer.cs">
       <DependentUpon>explore-3d.aspx</DependentUpon>
     </Compile>
+    <Compile Include="guest\news.aspx.cs">
+      <DependentUpon>news.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="guest\news.aspx.designer.cs">
+      <DependentUpon>news.aspx</DependentUpon>
+    </Compile>
     <Compile Include="guest\preview-quiz.aspx.cs">
       <DependentUpon>preview-quiz.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="guest\preview-quiz.aspx.designer.cs">
       <DependentUpon>preview-quiz.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="guest\resources.aspx.cs">
-      <DependentUpon>resources.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="guest\resources.aspx.designer.cs">
-      <DependentUpon>resources.aspx</DependentUpon>
     </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
@@ -237,6 +237,13 @@
     </Compile>
     <Compile Include="lecturer\upload-materials.aspx.designer.cs">
       <DependentUpon>upload-materials.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="lecturer\view-grades.aspx.cs">
+      <DependentUpon>view-grades.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="lecturer\view-grades.aspx.designer.cs">
+      <DependentUpon>view-grades.aspx</DependentUpon>
     </Compile>
     <Compile Include="lecturer\view-quiz.aspx.cs">
       <DependentUpon>view-quiz.aspx</DependentUpon>

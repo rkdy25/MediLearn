@@ -11,79 +11,70 @@ namespace WebApplication
 {
 
 
-    public partial class index
+    public partial class news
     {
 
         /// <summary>
-        /// formSearch control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm formSearch;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// txtSearch control.
+        /// lblNewsError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearch;
+        protected global::System.Web.UI.WebControls.Label lblNewsError;
 
         /// <summary>
-        /// btnSearch control.
+        /// ulNews control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ulNews;
 
         /// <summary>
-        /// searchResults control.
+        /// paginationControls control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl searchResults;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl paginationControls;
 
         /// <summary>
-        /// pnlSearchResults control.
+        /// btnPrevious control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlSearchResults;
+        protected global::System.Web.UI.WebControls.LinkButton btnPrevious;
 
         /// <summary>
-        /// rptSearchResults control.
+        /// litPageInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptSearchResults;
+        protected global::System.Web.UI.WebControls.Literal litPageInfo;
 
         /// <summary>
-        /// pnlNoResults control.
+        /// btnNext control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlNoResults;
-
-        /// <summary>
-        /// rptCourses control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptCourses;
+        protected global::System.Web.UI.WebControls.LinkButton btnNext;
     }
 }

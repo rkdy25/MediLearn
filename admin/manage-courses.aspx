@@ -190,7 +190,7 @@
             <h2>MediLearn Hub</h2>
         </div>
         <nav class="sidebar-nav">
-            <a href="dashboard.aspx" class="active">🏠 Dashboard</a>
+            <a href="dashboard.aspx">🏠 Dashboard</a>
 <a href="manage-users.aspx">👥 Manage Users</a>
 <a href="manage-materials.aspx">📂 Manage Materials</a>
 <a href="manage-courses.aspx">📚 Manage Courses</a>

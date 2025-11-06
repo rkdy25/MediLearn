@@ -1,4 +1,4 @@
-﻿=<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="view-grades.aspx.cs" Inherits="WebApplication.lecturer.view_grades" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="view-grades.aspx.cs" Inherits="WebApplication.lecturer.view_grades" %>
 
 <!DOCTYPE html>
 <html lang="en">

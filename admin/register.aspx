@@ -67,5 +67,50 @@
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
     </script>
+
+    <script>
+        const form = document.getElementById("formRegister");
+        const password = document.getElementById("txtPassword");
+        const confirm = document.getElementById("txtConfirm");
+        const messageDiv = document.getElementById("<%= message.ClientID %>");
+
+        form.addEventListener("submit", function (e) {
+            let errors = [];
+
+            const passVal = password.value.trim();
+
+            // Check password rules
+            if (passVal.length < 8) {
+                errors.push("Password must be at least 8 characters long.");
+            }
+            if (!/[A-Z]/.test(passVal)) {
+                errors.push("Password must contain at least one uppercase letter.");
+            }
+            if (!/[a-z]/.test(passVal)) {
+                errors.push("Password must contain at least one lowercase letter.");
+            }
+            if (!/[0-9]/.test(passVal)) {
+                errors.push("Password must contain at least one number.");
+            }
+            if (!/[\W_]/.test(passVal)) {
+                errors.push("Password must contain at least one special character.");
+            }
+            if (password.value !== confirm.value) {
+                errors.push("Passwords do not match.");
+            }
+
+            // Display errors
+            if (errors.length > 0) {
+                e.preventDefault();
+                messageDiv.innerHTML = errors.map(e => `<p style='color:#ff6b6b;'>${e}</p>`).join("");
+                messageDiv.style.display = "block";
+                return false;
+            }
+
+            messageDiv.innerHTML = "";
+            messageDiv.style.display = "none";
+        });
+    </script>
+
 </body>
 </html>
