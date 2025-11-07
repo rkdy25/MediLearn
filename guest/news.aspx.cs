@@ -57,7 +57,7 @@ namespace WebApplication
 
         private void LoadAllNews()
         {
-            string rssUrl = "https://www.sciencedaily.com/rss/top/health.xml";
+            string rssUrl = "https://www.nibib.nih.gov/rss";
          
             List<NewsItem> allNewsItems = new List<NewsItem>();
 

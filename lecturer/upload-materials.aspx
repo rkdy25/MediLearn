@@ -1,120 +1,119 @@
-﻿=<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="view-grades.aspx.cs" Inherits="WebApplication.lecturer.view_grades" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="upload-materials.aspx.cs" Inherits="WebApplication.lecturer.upload_materials" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>📊 View Student Grades | MediLearn Hub</title>
+    <title>Manage Course Materials | MediLearn Hub</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/dashboard.css" />
     <style>
-        .grades-header {
+        .course-header {
             background: #0078d7;
             color: white;
             padding: 15px 25px;
             border-radius: 12px;
             margin-bottom: 25px;
         }
-
-        .grades-card {
+        .upload-card, .materials-list {
             background: #fff;
             border-radius: 16px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             padding: 25px;
             margin-bottom: 25px;
         }
-
-        .form-control {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }
-
         .btn {
-            padding: 8px 14px;
+            padding: 6px 12px;
             border-radius: 6px;
             border: none;
             cursor: pointer;
         }
         .btn-primary { background: #0078d7; color: white; }
-        .btn-primary:hover { background: #005fa3; }
+        .btn-danger { background: #dc3545; color: white; }
         .btn-ghost { background: #f1f1f1; color: #333; }
-        .btn-ghost:hover { background: #e2e6ea; }
+        .form-control { width: 100%; padding: 8px; margin-bottom: 10px; }
 
         .nice-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #fff;
-            font-family: 'Segoe UI', sans-serif;
-        }
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    font-family: 'Segoe UI', sans-serif;
+}
 
-        .nice-table th {
-            background: #0078d7;
-            color: white;
-            padding: 12px;
-            text-align: left;
-            font-weight: 600;
-        }
+.nice-table th {
+    background: #0078d7;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+}
 
-        .nice-table td {
-            padding: 10px 14px;
-            border-bottom: 1px solid #eee;
-            vertical-align: middle;
-        }
+.nice-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
 
-        .nice-table tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
+.nice-table tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
 
-        .nice-table tr:hover {
-            background-color: #e9f5ff;
-            transition: background 0.3s;
-        }
+.nice-table tr:hover {
+    background-color: #e9f5ff;
+    transition: background 0.3s;
+}
 
-        .grid-pager {
-            padding: 12px;
-            background: #f1f1f1;
-            border-top: 1px solid #ddd;
-            text-align: center;
-        }
+.nice-table .btn {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
 
-        .grid-pager a, .grid-pager span {
-            margin: 0 5px;
-            padding: 6px 10px;
-            text-decoration: none;
-            color: #0078d7;
-            border-radius: 6px;
-        }
+.nice-table .btn-ghost {
+    background: #eef3f8;
+    color: #0078d7;
+    margin-right: 6px;
+}
 
-        .grid-pager span {
-            background: #0078d7;
-            color: white;
-        }
+.nice-table .btn-ghost:hover {
+    background: #d9ecff;
+}
 
-        .filter-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+.nice-table .btn-danger {
+    background: #dc3545;
+    color: white;
+}
 
-        .filter-row label {
-            font-weight: 600;
-        }
+.nice-table .btn-danger:hover {
+    background: #c82333;
+}
 
-        .message {
-            display: block;
-            margin-bottom: 15px;
-            font-weight: 500;
-            color: #333;
-        }
+.grid-pager {
+    padding: 12px;
+    background: #f1f1f1;
+    border-top: 1px solid #ddd;
+}
+
+.grid-pager a, .grid-pager span {
+    margin: 0 5px;
+    padding: 6px 10px;
+    text-decoration: none;
+    color: #0078d7;
+    border-radius: 6px;
+}
+
+.grid-pager span {
+    background: #0078d7;
+    color: white;
+}
+
     </style>
 </head>
 <body>
@@ -128,50 +127,84 @@
         </div>
         <nav class="sidebar-nav">
             <a href="profile.aspx">👤 Profile</a>
-            <a href="my-courses.aspx">📘 Manage Courses</a>
-            <a href="upload-materials.aspx">📂 Upload Materials</a>
-            <a href="view-grades.aspx" class="active">📊 View Grades</a>
-            <a href="../index.aspx">🚪 Logout</a>
+<a href="my-courses.aspx" class="active">📘 Manage Courses</a>
+<a href="search-resources.aspx">🔍 Search Resources</a>
+<a href="view-grades.aspx">📊 View Grades</a>
+<a href="../index.aspx">🚪 Logout</a>
         </nav>
     </aside>
 
-    <!-- Main Dashboard -->
+    <!-- Main Content -->
     <main class="dashboard-main">
-        <header class="grades-header">
-            <h1>📊 Student Grades Overview</h1>
+        <header class="course-header">
+            <h1>📂 Manage Materials for: <asp:Label ID="lblCourseName" runat="server" /></h1>
         </header>
 
-        <section class="grades-section">
+        <section class="materials-section">
 
-            <!-- Filter Panel -->
-            <div class="grades-card">
-                <h2>Filter by Quiz</h2>
-                <div class="filter-row">
-                    <label for="ddlQuizzes">Select Quiz:</label>
-                    <asp:DropDownList ID="ddlQuizzes" runat="server" CssClass="form-control"></asp:DropDownList>
-                    <asp:Button ID="btnView" runat="server" Text="View Grades" CssClass="btn btn-primary" OnClick="btnView_Click" />
-                </div>
-                <asp:Label ID="lblMessage" runat="server" CssClass="message"></asp:Label>
+            <!-- Upload Form -->
+            <div class="upload-card">
+                <h2>Upload New Material</h2>
+                <asp:Panel ID="pnlUpload" runat="server" CssClass="upload-form">
+
+                    <label for="txtTitle">Title</label>
+                    <asp:TextBox ID="txtTitle" runat="server" CssClass="form-control" Placeholder="Enter material title..." />
+
+                    <label for="ddlCategory">Category</label>
+                    <asp:DropDownList ID="ddlCategory" runat="server" CssClass="form-control">
+                        <asp:ListItem Text="Select a Category" Value="" />
+                        <asp:ListItem Text="Document" Value="Document" />
+                        <asp:ListItem Text="Power Point" Value="Power Point" />
+                        <asp:ListItem Text="Image" Value="Image" />
+                        <asp:ListItem Text="3D Video" Value="3D Video" />
+                    </asp:DropDownList>
+
+                    <label for="fileUpload">Choose File</label>
+                    <asp:FileUpload ID="fileUpload" runat="server" CssClass="form-control" />
+
+                    <asp:Button ID="btnUpload" runat="server" CssClass="btn btn-primary" Text="Upload Material" OnClick="btnUpload_Click" />
+                </asp:Panel>
             </div>
 
-            <!-- Grades Table -->
-            <div class="grades-card">
-                <h2>All Student Scores</h2>
-                <asp:GridView ID="gvGrades" runat="server" AutoGenerateColumns="False" CssClass="nice-table" AllowPaging="True" PageSize="10">
-                    <Columns>
-                        <asp:BoundField DataField="AttemptID" HeaderText="Attempt ID" />
-                        <asp:BoundField DataField="FirstName" HeaderText="First Name" />
-                        <asp:BoundField DataField="LastName" HeaderText="Last Name" />
-                        <asp:BoundField DataField="Score" HeaderText="Score (%)" />
-                        <asp:BoundField DataField="StartTime" HeaderText="Start Time" DataFormatString="{0:g}" />
-                        <asp:BoundField DataField="EndTime" HeaderText="End Time" DataFormatString="{0:g}" />
-                    </Columns>
-                    <PagerStyle CssClass="grid-pager" HorizontalAlign="Center" />
-                </asp:GridView>
-            </div>
+            <!-- Uploaded List -->
+<div class="materials-list">
+    <h2>All Uploaded Materials</h2>
+
+    <asp:GridView ID="gvMaterials" runat="server" AutoGenerateColumns="False" CssClass="nice-table"
+        AllowPaging="True" PageSize="5"
+        OnPageIndexChanging="gvMaterials_PageIndexChanging"
+        OnRowCommand="gvMaterials_RowCommand"
+        EmptyDataText="No materials uploaded for this course.">
+
+        <Columns>
+            <asp:BoundField DataField="Title" HeaderText="Title" />
+            <asp:BoundField DataField="Category" HeaderText="Category" />
+            <asp:BoundField DataField="FileType" HeaderText="File Type" />
+            <asp:BoundField DataField="UploadDate" HeaderText="Uploaded On" DataFormatString="{0:yyyy-MM-dd}" />
+           <asp:TemplateField HeaderText="Actions">
+    <ItemTemplate>
+        <asp:Button ID="btnDownload" runat="server" CssClass="btn btn-ghost" Text="⬇ Download"
+            CommandName="DownloadMaterial" CommandArgument='<%# Eval("MaterialID") %>' />
+
+        <asp:Button ID="btnEdit" runat="server" CssClass="btn btn-warning" Text="✏ Edit"
+            CommandName="EditMaterial" CommandArgument='<%# Eval("MaterialID") %>' />
+
+        <asp:Button ID="btnDelete" runat="server" CssClass="btn btn-danger" Text="🗑 Delete"
+            CommandName="DeleteMaterial" CommandArgument='<%# Eval("MaterialID") %>'
+            OnClientClick="return confirm('Are you sure you want to delete this material?');" />
+    </ItemTemplate>
+</asp:TemplateField>
+
+        </Columns>
+
+        <PagerStyle CssClass="grid-pager" HorizontalAlign="Center" />
+    </asp:GridView>
+</div>
+
+
         </section>
     </main>
 
 </form>
 </body>
-</html>
+</html>

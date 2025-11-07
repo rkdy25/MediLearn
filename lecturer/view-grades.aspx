@@ -128,10 +128,10 @@
         </div>
         <nav class="sidebar-nav">
             <a href="profile.aspx">👤 Profile</a>
-            <a href="my-courses.aspx">📘 Manage Courses</a>
-            <a href="upload-materials.aspx">📂 Upload Materials</a>
-            <a href="view-grades.aspx" class="active">📊 View Grades</a>
-            <a href="../index.aspx">🚪 Logout</a>
+<a href="my-courses.aspx" >📘 Manage Courses</a>
+<a href="search-resources.aspx">🔍 Search Resources</a>
+<a href="view-grades.aspx" class="active">📊 View Grades</a>
+<a href="../index.aspx">🚪 Logout</a>
         </nav>
     </aside>
 
